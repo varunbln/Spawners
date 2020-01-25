@@ -120,7 +120,7 @@ class SpawnerBlock extends PMSpawner
                     new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
                 ]);
                 $spawner = Item::get(Item::MOB_SPAWNER, 0, 1, $nbt);
-                $spawner->setCustomName(Utils::getEntityNameFromID(C::RESET . $tile->getEntityId()) . " Spawner");
+                $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
                 $this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
             }
         }
