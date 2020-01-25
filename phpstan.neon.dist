@@ -1,0 +1,13 @@
+parameters:
+    level: 7
+
+    checkMissingIterableValueType: false
+
+    paths:
+        - /source/src
+    autoload_files:
+        - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
+    autoload_directories:
+        - /source/src
+    excludes_analyse:
+        - vendor
