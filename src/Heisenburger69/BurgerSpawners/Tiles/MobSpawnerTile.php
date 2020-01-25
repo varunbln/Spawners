@@ -25,7 +25,8 @@ class MobSpawnerTile extends Spawnable
     public const SPAWN_RANGE = "SpawnRange";
     /** @var string */
     public const DELAY = "Delay";
-
+    /** @var string */
+    public const BASE_DELAY = "BaseDelay";
 
     /** @var CompoundTag */
     private $nbt;
@@ -41,6 +42,7 @@ class MobSpawnerTile extends Spawnable
             $nbt->removeTag(self::LOAD_RANGE);
             $nbt->removeTag(self::SPAWN_RANGE);
             $nbt->removeTag(self::DELAY);
+            $nbt->removeTag(self::BASE_DELAY);
         }
         if (!$nbt->hasTag(self::LOAD_RANGE, IntTag::class)) {
             $nbt->setInt(self::LOAD_RANGE, 15, true);
@@ -54,45 +56,13 @@ class MobSpawnerTile extends Spawnable
         if (!$nbt->hasTag(self::DELAY, IntTag::class)) {
             $nbt->setInt(self::DELAY, 800, true);
         }
+        if (!$nbt->hasTag(self::BASE_DELAY, IntTag::class)) {
+            $nbt->setInt(self::BASE_DELAY, 800, true);
+        }
         parent::__construct($level, $nbt);
         if ($this->getEntityId() > 0) {
             $this->scheduleUpdate();
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getEntityId(): int
-    {
-        return $this->getNBT()->getInt(self::ENTITY_ID);
-    }
-
-    /**
-     * @return CompoundTag
-     */
-    public function getNBT(): CompoundTag
-    {
-        return $this->nbt;
-    }
-
-    /**
-     * @param CompoundTag $nbt
-     */
-    public function addAdditionalSpawnData(CompoundTag $nbt): void
-    {
-        $this->baseData($nbt);
-    }
-
-    /**
-     * @param CompoundTag $nbt
-     */
-    private function baseData(CompoundTag $nbt): void
-    {
-        $nbt->setInt(self::LOAD_RANGE, $this->getNBT()->getInt(self::LOAD_RANGE), true);
-        $nbt->setInt(self::ENTITY_ID, $this->getNBT()->getInt(self::ENTITY_ID), true);
-        $nbt->setInt(self::DELAY, $this->getNBT()->getInt(self::DELAY), true);
-        $nbt->setInt(self::SPAWN_RANGE, $this->getNBT()->getInt(self::SPAWN_RANGE), true);
     }
 
     /**
@@ -119,7 +89,7 @@ class MobSpawnerTile extends Spawnable
                     }
                 }
                 if ($success > 0) {
-                    $this->setDelay($this->getDelay());
+                    $this->setDelay($this->getBaseDelay());
                 }
             } else {
                 $this->setDelay($this->getDelay() - 1);
@@ -163,6 +133,30 @@ class MobSpawnerTile extends Spawnable
     }
 
     /**
+     * @param int $value
+     */
+    public function setDelay(int $value): void
+    {
+        $this->getNBT()->setInt(self::DELAY, $value, true);
+    }
+
+    /**
+     * @return int
+     */
+    public function getBaseDelay(): int
+    {
+        return $this->getNBT()->getInt(self::BASE_DELAY);
+    }
+
+    /**
+     * @param int $value
+     */
+    public function setBaseDelay(int $value): void
+    {
+        $this->getNBT()->setInt(self::BASE_DELAY, $value, true);
+    }
+
+    /**
      * @return int
      */
     public function getSpawnRange(): int
@@ -173,9 +167,9 @@ class MobSpawnerTile extends Spawnable
     /**
      * @param int $value
      */
-    public function setDelay(int $value): void
+    public function setSpawnRange(int $value): void
     {
-        $this->getNBT()->setInt(self::DELAY, $value, true);
+        $this->getNBT()->setInt(self::SPAWN_RANGE, $value, true);
     }
 
     /**
@@ -184,16 +178,6 @@ class MobSpawnerTile extends Spawnable
     public function getName(): string
     {
         return Utils::getEntityNameFromID($this->getEntityId()) . " Spawner";
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setEntityId(int $id): void
-    {
-        $this->getNBT()->setInt(self::ENTITY_ID, $id, true);
-        $this->onChanged();
-        $this->scheduleUpdate();
     }
 
     /**
@@ -213,11 +197,48 @@ class MobSpawnerTile extends Spawnable
     }
 
     /**
-     * @param int $value
+     * @return int
      */
-    public function setSpawnRange(int $value): void
+    public function getEntityId(): int
     {
-        $this->getNBT()->setInt(self::SPAWN_RANGE, $value, true);
+        return $this->getNBT()->getInt(self::ENTITY_ID);
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setEntityId(int $id): void
+    {
+        $this->getNBT()->setInt(self::ENTITY_ID, $id, true);
+        $this->onChanged();
+        $this->scheduleUpdate();
+    }
+
+    /**
+     * @return CompoundTag
+     */
+    public function getNBT(): CompoundTag
+    {
+        return $this->nbt;
+    }
+
+    /**
+     * @param CompoundTag $nbt
+     */
+    public function addAdditionalSpawnData(CompoundTag $nbt): void
+    {
+        $this->baseData($nbt);
+    }
+
+    /**
+     * @param CompoundTag $nbt
+     */
+    private function baseData(CompoundTag $nbt): void
+    {
+        $nbt->setInt(self::LOAD_RANGE, $this->getNBT()->getInt(self::LOAD_RANGE), true);
+        $nbt->setInt(self::ENTITY_ID, $this->getNBT()->getInt(self::ENTITY_ID), true);
+        $nbt->setInt(self::DELAY, $this->getNBT()->getInt(self::DELAY), true);
+        $nbt->setInt(self::SPAWN_RANGE, $this->getNBT()->getInt(self::SPAWN_RANGE), true);
     }
 
     /**

@@ -1,7 +1,9 @@
 parameters:
-    level: 2
+    level: 3
 
     checkMissingIterableValueType: false
+
+    inferPrivatePropertyTypeFromConstructor: true
 
     paths:
         - /source/src
