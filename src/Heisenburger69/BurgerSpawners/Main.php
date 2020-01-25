@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Heisenburger69\BurgerSpawners;
 
 use Heisenburger69\BurgerSpawners\Commands\SpawnerCommand;
-use Heisenburger69\BurgerSpawners\Entities\EntityManager;
 use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
 use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
@@ -15,15 +14,15 @@ use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\tile\Tile;
+use pocketmine\utils\TextFormat as C;
 use ReflectionException;
 use ReflectionProperty;
-use pocketmine\utils\TextFormat as C;
 
 class Main extends PluginBase
 {
 
     /** @var string */
-    public const PREFIX = C::BOLD . C::AQUA . "Burger" . C::LIGHT_PURPLE . "Spawners" . C::RESET . "> ";
+    public const PREFIX = C::BOLD . C::AQUA . "Burger" . C::LIGHT_PURPLE . "Spawners" . "> " . C::RESET;
 
     public function onEnable(): void
     {

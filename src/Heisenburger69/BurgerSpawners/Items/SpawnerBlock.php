@@ -110,7 +110,7 @@ class SpawnerBlock extends PMSpawner
      * @param Player|null $player
      * @return bool
      */
-    public function onBreak(Item $item, Player $player = \null): bool
+    public function onBreak(Item $item, Player $player = null): bool
     {
         $parent = parent::onBreak($item, $player);
         if ($item->hasEnchantment(Enchantment::SILK_TOUCH)) {

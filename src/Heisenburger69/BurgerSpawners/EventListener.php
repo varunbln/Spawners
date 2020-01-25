@@ -34,9 +34,9 @@ class EventListener implements Listener
         if (!$entity instanceof Living or $entity instanceof Player) {
             return;
         }
-        $mobstacker = new Mobstacker($entity);
+        $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
-            if ($mobstacker->removeStack()) {
+            if ($mobStacker->removeStack()) {
                 $event->setCancelled(true);
             }
         }
@@ -49,8 +49,8 @@ class EventListener implements Listener
     {
         $entity = $event->getEntity();
         if ($entity instanceof Player or !$entity instanceof Living) return;
-        $mobstacker = new Mobstacker($entity);
-        $mobstacker->stack();
+        $mobStacker = new Mobstacker($entity);
+        $mobStacker->stack();
     }
 
 }

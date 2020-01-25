@@ -14,11 +14,10 @@ use pocketmine\utils\TextFormat as C;
 class Mobstacker
 {
 
-    /* @var Living */
-    private $entity;
-
     /** @var string */
     CONST STACK = 'stack';
+    /* @var Living */
+    private $entity;
 
     /**
      * Mobstacker constructor.
@@ -27,22 +26,6 @@ class Mobstacker
     public function __construct(Living $entity)
     {
         $this->entity = $entity;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStackAmount(): int
-    {
-        return $this->entity->namedtag->getInt(self::STACK);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isStacked(): bool
-    {
-        return $this->entity->namedtag->hasTag(self::STACK);
     }
 
     public function stack(): void
@@ -64,11 +47,39 @@ class Mobstacker
         $mobstack->updateNameTag();
     }
 
+    /**
+     * @return bool
+     */
+    public function isStacked(): bool
+    {
+        return $this->entity->namedtag->hasTag(self::STACK);
+    }
+
     public function updateNameTag(): void
     {
         $nbt = $this->entity->namedtag;
         $this->entity->setNameTagAlwaysVisible(True);
-        $this->entity->setNameTag(C::BOLD.C::AQUA.$nbt->getInt(self::STACK) . 'x ' . C::BOLD . C::GOLD . $this->entity->getName());
+        $this->entity->setNameTag(C::BOLD . C::AQUA . $nbt->getInt(self::STACK) . 'x ' . C::BOLD . C::GOLD . $this->entity->getName());
+    }
+
+    /**
+     * @param int $range
+     * @return Living|null
+     */
+    public function findNearStack(int $range = 16): ?Living
+    {
+        $entity = $this->entity;
+        if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
+        $boundingbox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
+        foreach ($entity->getLevel()->getNearbyEntities($boundingbox) as $e) {
+            if (!$e instanceof Player and $e instanceof Living) {
+                if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
+                    $ae = new Mobstacker($e);
+                    if ($ae->isStacked() and !$this->isStacked()) return $e;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -92,22 +103,10 @@ class Mobstacker
     }
 
     /**
-     * @param int $range
-     * @return Living|null
+     * @return int
      */
-    public function findNearStack(int $range = 16): ?Living
+    public function getStackAmount(): int
     {
-        $entity = $this->entity;
-        if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
-        $boundingbox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
-        foreach ($entity->getLevel()->getNearbyEntities($boundingbox) as $e) {
-            if (!$e instanceof Player and $e instanceof Living) {
-                if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
-                    $ae = new Mobstacker($e);
-                    if ($ae->isStacked() and !$this->isStacked()) return $e;
-                }
-            }
-        }
-        return null;
+        return $this->entity->namedtag->getInt(self::STACK);
     }
 }
