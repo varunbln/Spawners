@@ -73,7 +73,8 @@ class EventListener implements Listener
         if ($nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
             $player = $event->getPlayer();
             $vec3 = $event->getBlock()->asVector3();
-            $tile = $player->getLevel()->getTile($vec3);
+            $level = $player->getLevel();
+            $tile = $level->getTile($vec3);
             if (!$tile instanceof MobSpawnerTile) {
                 return;
             }

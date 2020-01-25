@@ -52,7 +52,12 @@ class SpawnerCommand extends PluginCommand
         }
 
         $entityName = strtolower($args[0]);
-        $entities = array_change_key_case($this->plugin->getRegisteredEntities(), CASE_LOWER);
+        $entities = $this->plugin->getRegisteredEntities();
+        if($entities === null) {
+            $sender->sendMessage(Main::PREFIX.C::RED."No registered entities!");
+            return false;
+        }
+        $entities = array_change_key_case($entities, CASE_LOWER);
         if (!array_key_exists($entityName, $entities)) {
             $sender->sendMessage(Main::PREFIX . C::RED . "Given Entity " . C::DARK_AQUA . $entityName . C::RED . " not registered!");
             return false;

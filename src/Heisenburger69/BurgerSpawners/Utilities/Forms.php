@@ -10,9 +10,13 @@ use pocketmine\utils\TextFormat as C;
 class Forms
 {
 
-    public static $usingSpawner = [];
+    public static $usingSpawner = (array) [];
 
-    public static function sendSpawnerForm(MobSpawnerTile $spawner, Player $player)
+    /**
+     * @param MobSpawnerTile $spawner
+     * @param Player $player
+     */
+    public static function sendSpawnerForm(MobSpawnerTile $spawner, Player $player): void
     {
         $form = new SimpleForm(function (Player $player, $data = null) {;
             if ($data === null) {
