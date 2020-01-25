@@ -18,15 +18,15 @@ class MobSpawnerTile extends Spawnable
 {
 
     /** @var string */
-    public const LOAD_RANGE = "LoadRange";
+    public const LOAD_RANGE = "LoadRange";//Distance for player beyond which no mobs are spawned
     /** @var string */
-    public const ENTITY_ID = "EntityID";
+    public const ENTITY_ID = "EntityID";//ID of the Entity
     /** @var string */
-    public const SPAWN_RANGE = "SpawnRange";
+    public const SPAWN_RANGE = "SpawnRange";//Radius around the spawner in which the mob might spawn
     /** @var string */
-    public const DELAY = "Delay";
+    public const BASE_DELAY = "BaseDelay";//Delay in ticks between spawning of mobs
     /** @var string */
-    public const BASE_DELAY = "BaseDelay";
+    public const DELAY = "Delay";//Current Delay in ticks before the next mob is spawned
 
     /** @var CompoundTag */
     private $nbt;
@@ -53,11 +53,11 @@ class MobSpawnerTile extends Spawnable
         if (!$nbt->hasTag(self::SPAWN_RANGE, IntTag::class)) {
             $nbt->setInt(self::SPAWN_RANGE, 4, true);
         }
-        if (!$nbt->hasTag(self::DELAY, IntTag::class)) {
-            $nbt->setInt(self::DELAY, 800, true);
-        }
         if (!$nbt->hasTag(self::BASE_DELAY, IntTag::class)) {
             $nbt->setInt(self::BASE_DELAY, 800, true);
+        }
+        if (!$nbt->hasTag(self::DELAY, IntTag::class)) {
+            $nbt->setInt(self::DELAY, 800, true);
         }
         parent::__construct($level, $nbt);
         if ($this->getEntityId() > 0) {
@@ -78,6 +78,10 @@ class MobSpawnerTile extends Spawnable
             if ($this->getDelay() <= 0) {
                 $success = 0;
                 for ($i = 0; $i < 16; $i++) {
+                    if($success > 0) {
+                        $this->setDelay($this->getBaseDelay());
+                        return true;
+                    }
                     $pos = $this->add(mt_rand() / mt_getrandmax() * $this->getSpawnRange(), mt_rand(-1, 1), mt_rand() / mt_getrandmax() * $this->getSpawnRange());
                     $target = $this->getLevel()->getBlock($pos);
                     if ($target->getId() == Item::AIR) {
@@ -113,7 +117,7 @@ class MobSpawnerTile extends Spawnable
         $hasPlayer = false;
         foreach ($this->getLevel()->getEntities() as $e) {
             if ($e instanceof Player) {
-                if ($e->distance($this->getBlock()) <= 15) {
+                if ($e->distance($this->getBlock()) <= $this->getLoadRange()) {
                     $hasPlayer = true;
                 }
             }
@@ -193,7 +197,26 @@ class MobSpawnerTile extends Spawnable
      */
     public function setLoadRange(int $range): void
     {
-        $this->getNBT()->setInt(self::LOAD_RANGE, true);
+        $this->getNBT()->setInt(self::LOAD_RANGE, $range, true);
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        $base = (int)$this->getBaseDelay();
+        $count = 800 / $base;
+        return $count;
+    }
+
+    /**
+     * @param int $count
+     */
+    public function setCount(int $count): void
+    {
+        $base = 800 / $count;
+        $this->setBaseDelay($base);
     }
 
     /**

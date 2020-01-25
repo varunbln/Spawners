@@ -27,7 +27,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../pmmp" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -67,7 +67,7 @@
       <workItem from="1579867054747" duration="4454000" />
       <workItem from="1579949227780" duration="529000" />
       <workItem from="1579950796462" duration="1059000" />
-      <workItem from="1579952604556" duration="2875000" />
+      <workItem from="1579952604556" duration="8210000" />
     </task>
     <servers />
   </component>
