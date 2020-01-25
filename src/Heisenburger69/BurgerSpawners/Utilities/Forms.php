@@ -10,7 +10,7 @@ use pocketmine\utils\TextFormat as C;
 class Forms
 {
 
-    public static $usingSpawner = (array) [];
+    public static $usingSpawner = [];
 
     /**
      * @param MobSpawnerTile $spawner
