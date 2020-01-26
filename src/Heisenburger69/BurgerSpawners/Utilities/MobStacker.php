@@ -19,6 +19,7 @@ TODO: Submit a PR to the plugin.
 /**
  * Class Mobstacker
  * @package Heisenburger69\BurgerSpawners\Utilities
+ */
 class Mobstacker
 {
 
