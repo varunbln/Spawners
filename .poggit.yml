@@ -5,6 +5,7 @@ branches:
 projects:
   BurgerSpawners:
     path: ""
+    icon: Spawner_JE3.png
     libs:
       - src: jojoe77777/FormAPI/libFormAPI
         version: ^1.3
