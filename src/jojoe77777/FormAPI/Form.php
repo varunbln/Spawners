@@ -35,7 +35,8 @@ abstract class Form implements IForm{
         return $this->callable;
     }
 
-    public function setCallable(?callable $callable) {
+    public function setCallable(?callable $callable): void
+    {
         $this->callable = $callable;
     }
 
@@ -47,10 +48,11 @@ abstract class Form implements IForm{
         }
     }
 
-    public function processData(&$data) : void {
+    public function processData(?array &$data) : void {
     }
 
-    public function jsonSerialize(){
+    public function jsonSerialize(): array
+    {
         return $this->data;
     }
 }

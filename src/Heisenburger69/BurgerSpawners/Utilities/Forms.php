@@ -14,6 +14,9 @@ use pocketmine\utils\TextFormat as C;
 class Forms
 {
 
+    /**
+     * @var array
+     */
     public static $usingSpawner = [];
 
     /**

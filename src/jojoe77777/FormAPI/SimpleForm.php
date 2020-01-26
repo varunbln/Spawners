@@ -12,6 +12,9 @@ class SimpleForm extends Form {
     /** @var string */
     private $content = "";
 
+    /**
+     * @var array
+     */
     private $labelMap = [];
 
     /**
@@ -24,7 +27,7 @@ class SimpleForm extends Form {
         $this->data["content"] = $this->content;
     }
 
-    public function processData(&$data) : void {
+    public function processData(?array &$data) : void {
         $data = $this->labelMap[$data] ?? null;
     }
 

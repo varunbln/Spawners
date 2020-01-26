@@ -6,6 +6,9 @@ namespace jojoe77777\FormAPI;
 
 class CustomForm extends Form {
 
+    /**
+     * @var array
+     */
     private $labelMap = [];
 
     /**
@@ -18,7 +21,8 @@ class CustomForm extends Form {
         $this->data["content"] = [];
     }
 
-    public function processData(&$data) : void {
+
+    public function processData(?array &$data) : void {
         if(is_array($data)) {
             $new = [];
             foreach ($data as $i => $v) {
