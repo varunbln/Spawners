@@ -21,8 +21,10 @@ class CustomForm extends Form {
         $this->data["content"] = [];
     }
 
-
-    public function processData(?array &$data) : void {
+    /**
+     * @param mixed $data
+     */
+    public function processData(&$data) : void {
         if(is_array($data)) {
             $new = [];
             foreach ($data as $i => $v) {

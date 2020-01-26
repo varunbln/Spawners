@@ -27,7 +27,10 @@ class SimpleForm extends Form {
         $this->data["content"] = $this->content;
     }
 
-    public function processData(?array &$data) : void {
+    /**
+     * @param mixed $data
+     */
+    public function processData(&$data) : void {
         $data = $this->labelMap[$data] ?? null;
     }
 

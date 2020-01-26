@@ -48,7 +48,10 @@ abstract class Form implements IForm{
         }
     }
 
-    public function processData(?array &$data) : void {
+    /**
+     * @param mixed $data
+     */
+    public function processData(&$data) : void {
     }
 
     public function jsonSerialize(): array
