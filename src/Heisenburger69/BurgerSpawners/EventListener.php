@@ -12,7 +12,6 @@ use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\nbt\tag\IntTag;
-use pocketmine\Player;
 
 /**
  * Class EventListener
@@ -40,7 +39,7 @@ class EventListener implements Listener
     public function onDamage(EntityDamageEvent $event): void
     {
         $entity = $event->getEntity();
-        if (!$entity instanceof Living or $entity instanceof Player) {
+        if (!$entity instanceof Living or $entity instanceof Human) {
             return;
         }
         $mobStacker = new Mobstacker($entity);
@@ -58,7 +57,7 @@ class EventListener implements Listener
     public function onSpawn(EntitySpawnEvent $event): void
     {
         $entity = $event->getEntity();
-        if ($entity instanceof Player or !$entity instanceof Living) return;
+        if ($entity instanceof Human or !$entity instanceof Living) return;
         $mobStacker = new Mobstacker($entity);
         $mobStacker->stack();
     }

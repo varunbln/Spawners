@@ -1,8 +1,7 @@
 parameters:
+
     level: 7
-
     checkMissingIterableValueType: false
-
     inferPrivatePropertyTypeFromConstructor: true
 
     paths:

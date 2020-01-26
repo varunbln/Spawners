@@ -43,7 +43,7 @@ class SpawnerCommand extends PluginCommand
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if (!$sender->hasPermission("burgerspawners.command.spawner")) {
-            $sender->sendMessage(C::DARK_RED . "Insufficient Permission.");
+            $sender->sendMessage(Main::PREFIX . C::DARK_RED . "Insufficient Permission.");
             return false;
         }
         if (empty($args)) {
@@ -53,13 +53,13 @@ class SpawnerCommand extends PluginCommand
 
         $entityName = strtolower($args[0]);
         $entities = $this->plugin->getRegisteredEntities();
-        if($entities === null) {
-            $sender->sendMessage(Main::PREFIX.C::RED."No registered entities!");
+        if ($entities === null) {
+            $sender->sendMessage(Main::PREFIX . C::RED . "No registered entities!");
             return false;
         }
         $entities = array_change_key_case($entities, CASE_LOWER);
         if (!array_key_exists($entityName, $entities)) {
-            $sender->sendMessage(Main::PREFIX . C::RED . "Given Entity " . C::DARK_AQUA . $entityName . C::RED . " not registered!");
+            $sender->sendMessage(Main::PREFIX . C::RED . "Given entity " . C::DARK_AQUA . $entityName . C::RED . " not registered!");
             return false;
         }
 

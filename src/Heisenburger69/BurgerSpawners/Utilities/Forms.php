@@ -72,7 +72,7 @@ class Forms
                         $stackCount = $item->getCount();
                         $max = $stackCount;
                     } else {
-                        $player->sendMessage(Main::PREFIX . C::RED . "You do not have any spawners of this type in your Inventory!");
+                        $player->sendMessage(Main::PREFIX . C::RED . "You do not have any spawners of this type in your hand!");
                         return;
                     }
 
