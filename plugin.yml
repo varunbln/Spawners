@@ -6,4 +6,5 @@ api: 3.0.0
 author: Heisenburger69
 website: https://github.com/Heisenburger69
 description: Plugin implementing a Stackable Spawner System for PMMP
+softdepend: [PureEntitiesX]
 ...

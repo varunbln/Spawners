@@ -25,7 +25,7 @@ class EntityManager extends Entity //Future Addition
         self::registerEntity(Guardian::class, true, ['Guardian', 'minecraft:guardian']);
         self::registerEntity(Horse::class, true, ['Horse', 'minecraft:horse']);
         self::registerEntity(Husk::class, true, ['Husk', 'minecraft:husk']);*/
-        //self::registerEntity(IronGolem::class, true, ['IronGolem', 'minecraft:irongolem']);
+        self::registerEntity(IronGolem::class, true, ['IronGolem', 'minecraft:irongolem']);
         /*self::registerEntity(Llama::class, true, ['Llama', 'minecraft:llama']);
         self::registerEntity(MagmaCube::class, true, ['MagmaCube', 'minecraft:magmacube']);
         self::registerEntity(Mooshroom::class, true, ['Mooshroom', 'minecraft:mooshroom']);
