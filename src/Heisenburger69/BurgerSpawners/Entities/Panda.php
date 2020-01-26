@@ -5,6 +5,7 @@ namespace Heisenburger69\BurgerSpawners\Entities;
 
 
 use pocketmine\entity\Animal;
+use pocketmine\item\Item;
 
 class Panda extends Animal
 {
@@ -17,5 +18,11 @@ class Panda extends Animal
     public function getName(): string
     {
         return "Panda";
+    }
+
+    public function getDrops(): array
+    {
+        $item = Item::get(Item::EMERALD, 0, mt_rand(1, 3));
+        return [$item];
     }
 }

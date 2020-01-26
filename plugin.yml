@@ -3,5 +3,5 @@ name: BurgerSpawners
 version: 0.0.1
 main: Heisenburger69\BurgerSpawners\Main
 api: 3.0.0
-description: Plugin implementing an advanced Spawner System for PMMP
+description: Plugin implementing a Stackable Spawner System for PMMP
 ...

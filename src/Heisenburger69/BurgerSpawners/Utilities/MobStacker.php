@@ -9,7 +9,13 @@ use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
 
-//From MobStacker by UnknownOre
+/*
+Modified version of MobStacker by UnknownOre
+Modified to fix:
+    1. Mobs instantly dying and taking no kb when in a stack
+    2. Mobs not dropping experience orbs
+TODO: Submit a PR to the plugin.
+*/
 
 class Mobstacker
 {
@@ -70,8 +76,8 @@ class Mobstacker
     {
         $entity = $this->entity;
         if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
-        $boundingbox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
-        foreach ($entity->getLevel()->getNearbyEntities($boundingbox) as $e) {
+        $boundingBox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
+        foreach ($entity->getLevel()->getNearbyEntities($boundingBox) as $e) {
             if (!$e instanceof Player and $e instanceof Living) {
                 if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
                     $ae = new Mobstacker($e);
@@ -96,9 +102,15 @@ class Mobstacker
         $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
         $event->call();
         $this->updateNameTag();
+
         foreach ($drops as $drop) {
             $entity->getLevel()->dropItem($entity->getPosition(), $drop);
         }
+        $exp = $entity->getXpDropAmount();
+        if ($exp > 0) {
+            $entity->getLevel()->dropExperience($entity->asVector3(), $exp);
+        }
+
         return true;
     }
 

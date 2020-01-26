@@ -2,6 +2,7 @@
 
 namespace Heisenburger69\BurgerSpawners\Tiles;
 
+use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\entity\Entity;
 use pocketmine\item\Item;
@@ -27,6 +28,8 @@ class MobSpawnerTile extends Spawnable
     public const BASE_DELAY = "BaseDelay";//Delay in ticks between spawning of mobs
     /** @var string */
     public const DELAY = "Delay";//Current Delay in ticks before the next mob is spawned
+    /** @var string */
+    public const COUNT = "Count";//Number of spawners stacked
 
     /** @var CompoundTag */
     private $nbt;
@@ -43,6 +46,7 @@ class MobSpawnerTile extends Spawnable
             $nbt->removeTag(self::SPAWN_RANGE);
             $nbt->removeTag(self::DELAY);
             $nbt->removeTag(self::BASE_DELAY);
+            $nbt->removeTag(self::COUNT);
         }
         if (!$nbt->hasTag(self::LOAD_RANGE, IntTag::class)) {
             $nbt->setInt(self::LOAD_RANGE, 15, true);
@@ -59,6 +63,10 @@ class MobSpawnerTile extends Spawnable
         if (!$nbt->hasTag(self::DELAY, IntTag::class)) {
             $nbt->setInt(self::DELAY, 800, true);
         }
+        if (!$nbt->hasTag(self::COUNT, IntTag::class)) {
+            $nbt->setInt(self::COUNT, 1, true);
+        }
+
         parent::__construct($level, $nbt);
         if ($this->getEntityId() > 0) {
             $this->scheduleUpdate();
@@ -78,7 +86,7 @@ class MobSpawnerTile extends Spawnable
             if ($this->getDelay() <= 0) {
                 $success = 0;
                 for ($i = 0; $i < 16; $i++) {
-                    if($success > 0) {
+                    if ($success > 0) {
                         $this->setDelay($this->getBaseDelay());
                         return true;
                     }
@@ -149,7 +157,10 @@ class MobSpawnerTile extends Spawnable
      */
     public function getBaseDelay(): int
     {
-        return $this->getNBT()->getInt(self::BASE_DELAY);
+        $count = $this->getCount();
+        $baseDelay = 800 / $count;
+        $this->setBaseDelay($baseDelay);
+        return $baseDelay;
     }
 
     /**
@@ -177,6 +188,22 @@ class MobSpawnerTile extends Spawnable
     }
 
     /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->getNBT()->getInt(self::COUNT);
+    }
+
+    /**
+     * @param int $value
+     */
+    public function setCount(int $value): void
+    {
+        $this->getNBT()->setInt(self::COUNT, $value, true);
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -198,25 +225,6 @@ class MobSpawnerTile extends Spawnable
     public function setLoadRange(int $range): void
     {
         $this->getNBT()->setInt(self::LOAD_RANGE, $range, true);
-    }
-
-    /**
-     * @return int
-     */
-    public function getCount(): int
-    {
-        $base = (int)$this->getBaseDelay();
-        $count = 800 / $base;
-        return $count;
-    }
-
-    /**
-     * @param int $count
-     */
-    public function setCount(int $count): void
-    {
-        $base = 800 / $count;
-        $this->setBaseDelay($base);
     }
 
     /**
@@ -258,6 +266,7 @@ class MobSpawnerTile extends Spawnable
      */
     private function baseData(CompoundTag $nbt): void
     {
+        $nbt->setInt("EntityId", $this->getNBT()->getInt(self::ENTITY_ID), true);
         $nbt->setInt(self::LOAD_RANGE, $this->getNBT()->getInt(self::LOAD_RANGE), true);
         $nbt->setInt(self::ENTITY_ID, $this->getNBT()->getInt(self::ENTITY_ID), true);
         $nbt->setInt(self::DELAY, $this->getNBT()->getInt(self::DELAY), true);
@@ -278,6 +287,11 @@ class MobSpawnerTile extends Spawnable
     protected function writeSaveData(CompoundTag $nbt): void
     {
         $this->baseData($nbt);
+    }
+
+    public function sendAddSpawnersForm(Player $player): void
+    {
+        Forms::sendAddSpawnerForm($player, $this);
     }
 
 }

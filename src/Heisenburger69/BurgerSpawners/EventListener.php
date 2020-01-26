@@ -2,10 +2,10 @@
 
 namespace Heisenburger69\BurgerSpawners;
 
-use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
+use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
@@ -46,6 +46,7 @@ class EventListener implements Listener
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
             if ($mobStacker->removeStack()) {
+                $entity->setHealth($entity->getMaxHealth());
                 $event->setCancelled(true);
             }
         }
@@ -62,7 +63,6 @@ class EventListener implements Listener
         $mobStacker->stack();
     }
 
-
     /**
      * @param PlayerInteractEvent $event
      */
@@ -70,11 +70,11 @@ class EventListener implements Listener
     {
         $item = $event->getItem();
         $nbt = $item->getNamedTag();
+        $player = $event->getPlayer();
+        $vec3 = $event->getBlock()->asVector3();
+        $level = $player->getLevel();
+        $tile = $level->getTile($vec3);
         if ($nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
-            $player = $event->getPlayer();
-            $vec3 = $event->getBlock()->asVector3();
-            $level = $player->getLevel();
-            $tile = $level->getTile($vec3);
             if (!$tile instanceof MobSpawnerTile) {
                 return;
             }
@@ -82,6 +82,11 @@ class EventListener implements Listener
             $event->setCancelled(true);
             return;
         }
+        if (!$tile instanceof MobSpawnerTile) {
+            return;
+        }
+        Forms::sendSpawnerForm($tile, $player);
+        $event->setCancelled(true);
     }
 
 

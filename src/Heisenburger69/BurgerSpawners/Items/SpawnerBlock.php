@@ -63,7 +63,6 @@ class SpawnerBlock extends PMSpawner
         $nbt = $item->getNamedTag();
         if ($nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
             $entityId = $nbt->getInt(MobSpawnerTile::ENTITY_ID);
-            var_dump($entityId);
             $tile = $this->getLevel()->getTile($this);
             if (!is_null($tile)) {
                 $this->getLevel()->removeTile($tile);
@@ -119,7 +118,8 @@ class SpawnerBlock extends PMSpawner
                 $nbt = new CompoundTag("", [
                     new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
                 ]);
-                $spawner = Item::get(Item::MOB_SPAWNER, 0, 1, $nbt);
+                $count = $tile->getCount();
+                $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
                 $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
                 $this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
             }
