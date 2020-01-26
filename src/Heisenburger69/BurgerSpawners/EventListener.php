@@ -67,9 +67,6 @@ class EventListener implements Listener
      */
     public function onPlaceSpawner(PlayerInteractEvent $event): void
     {
-        if(!$event->getAction() !== PlayerInteractEvent::RIGHT_CLICK_BLOCK) {
-            return;
-        }
         $item = $event->getItem();
         $nbt = $item->getNamedTag();
         $player = $event->getPlayer();
