@@ -14,11 +14,11 @@ jobs:
         echo Making directory...
         mkdir vendor
         echo Directory made.
-    - name: Run PHPStan
-      uses: nxtlvlsoftware/pmmp-phpstan-action@3
-      with:
-        phpstan-config: phpstan.neon.dist
     - name: wget virions, formapi
       uses: wei/wget@v1
       with:
         args: -O vendor/libFormAPI.phar https://poggit.pmmp.io/r/54590/libFormAPI_dev-2.phar
+    - name: Run PHPStan
+      uses: nxtlvlsoftware/pmmp-phpstan-action@3
+      with:
+        phpstan-config: phpstan.neon.dist
