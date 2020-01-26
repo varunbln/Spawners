@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Animal;
+use pocketmine\item\Item;
 
 class IronGolem extends Animal
 {
@@ -15,5 +16,15 @@ class IronGolem extends Animal
     public function getName(): string
     {
         return "Iron Golem";
+    }
+
+    public function getDrops(): array
+    {
+        $iron = Item::get(Item::IRON_INGOT, 0, mt_rand(1, 2));
+        $rose = Item::get(Item::RED_FLOWER, 0, 1);
+        if(mt_rand(0, 5) === 0) {
+            return [$iron, $rose];
+        }
+        return [$iron];
     }
 }
