@@ -29,6 +29,7 @@ class Main extends PluginBase
     {
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
         $this->getServer()->getCommandMap()->register("burgerspawners", new SpawnerCommand($this));
+        /** @noinspection PhpUnhandledExceptionInspection */
         Tile::registerTile(MobSpawnerTile::class, [Tile::MOB_SPAWNER, "minecraft:mob_spawner"]);
         BlockFactory::registerBlock(new SpawnerBlock(), true);
         ItemFactory::registerItem(new SpawnEgg(), true);
