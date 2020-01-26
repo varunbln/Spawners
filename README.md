@@ -1,2 +1,3 @@
 # BurgerSpawners
- Pocketmine Plugin implementing Spawners
+ Pocketmine Plugin implementing a Stackable Spawner System.
+
