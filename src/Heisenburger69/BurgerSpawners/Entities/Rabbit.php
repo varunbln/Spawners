@@ -49,7 +49,11 @@ class Rabbit extends Animal {
         return "Rabbit";
     }
 
-    public function setRabbitType(int $type){
+    /**
+     * @param int $type
+     */
+    public function setRabbitType(int $type):void
+    {
         $this->namedtag->setInt(self::TAG_RABBIT_TYPE, $type);
     }
 
@@ -68,7 +72,7 @@ class Rabbit extends Animal {
             }
         }
         $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1))];
-        if($this->getLastDamageCause() === EntityDamageEvent::CAUSE_FIRE){
+        if($this->getLastDamageCause() == EntityDamageEvent::CAUSE_FIRE){
             $drops[] = Item::get(Item::COOKED_RABBIT, 0, mt_rand(0, 1));
         }else{
             $drops[] = Item::get(Item::RAW_RABBIT, 0, mt_rand(0, 1));

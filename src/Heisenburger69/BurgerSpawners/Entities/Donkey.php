@@ -11,7 +11,7 @@ class Donkey extends Animal
     public const NETWORK_ID = self::DONKEY;
 
     public $width = 0.3;
-    public $length = 0.9;
+    public $length = (float) 0.9;
     public $height = 0;
 
     public function getName(): string

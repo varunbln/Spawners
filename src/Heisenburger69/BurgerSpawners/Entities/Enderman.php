@@ -10,7 +10,7 @@ class Enderman extends Monster {
     public const NETWORK_ID = self::ENDERMAN;
 
     public $width = 0.3;
-    public $length = 0.9;
+    public $length = (float) 0.9;
     public $height = 1.8;
 
     public function getName(): string{

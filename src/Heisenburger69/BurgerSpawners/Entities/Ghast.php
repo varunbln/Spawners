@@ -10,7 +10,7 @@ class Ghast extends Monster {
     public const NETWORK_ID = self::GHAST;
 
     public $width = 6;
-    public $length = 6;
+    public $length = (int) 6;
     public $height = 6;
 
     public function getName(): string{
