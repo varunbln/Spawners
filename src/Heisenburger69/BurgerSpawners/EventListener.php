@@ -11,7 +11,7 @@ use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\item\Pickaxe;
+use pocketmine\block\MobSpawner;
 use pocketmine\nbt\tag\IntTag;
 
 /**
@@ -69,7 +69,7 @@ class EventListener implements Listener
     public function onPlaceSpawner(PlayerInteractEvent $event): void
     {
         $item = $event->getItem();
-        if($item instanceof Pickaxe) {
+        if(!$item instanceof MobSpawner) {
             return;
         }
         $nbt = $item->getNamedTag();
