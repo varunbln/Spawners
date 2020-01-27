@@ -11,5 +11,6 @@ parameters:
     autoload_directories:
         - /source/src
         - phar:///source/vendor/libFormAPI.phar/src
+        - phar:///source/vendor/UpdateNotifier.phar/src
     excludes_analyse:
         - source/vendor
