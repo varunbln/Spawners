@@ -21,7 +21,8 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - [ ] Spawner Shop with configurable prices
 - [ ] Set Mob Experience drops correctly
 - [ ] Implement Looting Enchantment
-- [ ] Autostack spawners when placed near another spawner of the same type.
+- [ ] Autostack spawners when placed near another spawner of the same type
+- [ ] Allow changing of the entity scale within the Spawner
 # Note
 - Pandas drop Emeralds instead of Bamboo
 - Bats, Ocelots, Vex, Witches, Silverfish and Endermite have no drops

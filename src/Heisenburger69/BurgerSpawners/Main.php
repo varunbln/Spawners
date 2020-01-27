@@ -18,8 +18,7 @@ use pocketmine\tile\Tile;
 use pocketmine\utils\TextFormat as C;
 use ReflectionException;
 use ReflectionProperty;
-use JackMD\UpdateNotifier\UpdateNotifier;
-
+//use JackMD\UpdateNotifier\UpdateNotifier;
 
 class Main extends PluginBase
 {
@@ -37,7 +36,7 @@ class Main extends PluginBase
         ItemFactory::registerItem(new SpawnEgg(), true);
         Item::initCreativeItems();
         EntityManager::init();//Only registering Iron Golems for now
-        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
+        //UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
     /**

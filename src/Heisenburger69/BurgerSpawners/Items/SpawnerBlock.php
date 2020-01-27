@@ -79,6 +79,7 @@ class SpawnerBlock extends PMSpawner
                 $tile = Tile::createTile(Tile::MOB_SPAWNER, $this->getLevel(), $nbt);
                 if ($tile instanceof MobSpawnerTile) {
                     $tile->setEntityId($entityId);
+                    $tile->setEntityScale(1.3);
                 }
             }
         }

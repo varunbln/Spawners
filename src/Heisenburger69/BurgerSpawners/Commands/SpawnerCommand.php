@@ -47,16 +47,24 @@ class SpawnerCommand extends PluginCommand
             return false;
         }
         if (empty($args)) {
-            $sender->sendMessage(Main::PREFIX . C::RED . "/spawner <spawner> <count> <player>");
+            $sender->sendMessage(Main::PREFIX . C::RED . "/spawner <spawner/list> <count> <player>");
             return false;
         }
+        $entities = Utils::getEntityArrayList();
 
-        $entityName = strtolower($args[0]);
+        if(isset($args[0]) && $args[0] === "list") {
+            $list = implode(", ", $entities);
+            $sender->sendMessage(Main::PREFIX . C::GOLD . "List of Available Spawners:\n".C::YELLOW.$list);
+            return true;
+        }
+
         $entities = $this->plugin->getRegisteredEntities();
+        $entityName = strtolower($args[0]);
         if ($entities === null) {
             $sender->sendMessage(Main::PREFIX . C::RED . "No registered entities!");
             return false;
         }
+
         $entities = array_change_key_case($entities, CASE_LOWER);
         if (!array_key_exists($entityName, $entities)) {
             $sender->sendMessage(Main::PREFIX . C::RED . "Given entity " . C::DARK_AQUA . $entityName . C::RED . " not registered!");

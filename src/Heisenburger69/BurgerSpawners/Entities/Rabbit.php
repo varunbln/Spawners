@@ -72,11 +72,6 @@ class Rabbit extends Animal {
             }
         }
         $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1))];
-        if($this->getLastDamageCause()->getCause() === EntityDamageEvent::CAUSE_FIRE){
-            $drops[] = Item::get(Item::COOKED_RABBIT, 0, mt_rand(0, 1));
-        }else{
-            $drops[] = Item::get(Item::RAW_RABBIT, 0, mt_rand(0, 1));
-        }
         if(mt_rand(1, 200) <= (5 + 2 * $lootingL)){
             $drops[] = Item::get(Item::RABBIT_FOOT, 0, 1);
         }

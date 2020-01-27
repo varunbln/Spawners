@@ -246,6 +246,16 @@ class MobSpawnerTile extends Spawnable
     }
 
     /**
+     * @param float $scale
+     */
+    public function setEntityScale(float $scale): void
+    {
+        $this->getNBT()->setFloat("DisplayEntityScale", $scale, true);
+        $this->onChanged();
+        $this->scheduleUpdate();
+    }
+
+    /**
      * @return CompoundTag
      */
     public function getNBT(): CompoundTag

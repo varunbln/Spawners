@@ -52,6 +52,7 @@ class Utils
             EntityIds::SPIDER => "Spider",
             EntityIds::SQUID => "Squid",
             EntityIds::STRAY => "Stray",
+            EntityIds::VEX => "Vex",
             EntityIds::VILLAGER => "Villager",
             EntityIds::VINDICATOR => "Vindicator",
             EntityIds::WITCH => "Witch",
@@ -64,6 +65,57 @@ class Utils
         ];
 
         return $names[$entityID] ?? "Monster";
+    }
+
+    /**
+     * @return array
+     */
+    public static function getEntityArrayList(): array
+    {
+        $names = [
+            "bat",
+            "blaze",
+            "cavespider",
+            "chicken",
+            "cow",
+            "creeper",
+            "donkey",
+            "elderguardian",
+            "enderman",
+            "endermite",
+            "ghast",
+            "guardian",
+            "horse",
+            "husk",
+            "irongolem",
+            "llama",
+            "magmacube",
+            "mooshroom",
+            "mule",
+            "ocelot",
+            "panda",
+            "parrot",
+            "pig",
+            "polarbear",
+            "rabbit",
+            "sheep",
+            "shulker",
+            "silverfish",
+            "skeleton",
+            "slime",
+            "snowgolem",
+            "spider",
+            "squid",
+            "stray",
+            "vex",
+            "vindicator",
+            "witch",
+            "witherskeleton",
+            "wolf",
+            "zombie",
+            "zombiepigman",
+            "zombievillager"];
+        return $names;
     }
 
     /**
@@ -110,6 +162,7 @@ class Utils
             "spider" => EntityIds::SPIDER,
             "squid" => EntityIds::SQUID,
             "stray" => EntityIds::STRAY,
+            "vex" => EntityIds::VEX,
             "villager" => EntityIds::VILLAGER,
             "vindicator" => EntityIds::VINDICATOR,
             "witch" => EntityIds::WITCH,
