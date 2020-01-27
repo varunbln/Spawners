@@ -9,6 +9,6 @@ projects:
     libs:
       - src: jojoe77777/FormAPI/libFormAPI
         version: ^1.3
-      - src: JackMD\UpdateNotifier\UpdateNotifier
+      - src: JackMD/UpdateNotifier/UpdateNotifier
         version: ^1.0.0
 ...
