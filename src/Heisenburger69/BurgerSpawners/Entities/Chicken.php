@@ -10,7 +10,8 @@ class Chicken extends Animal {
     public const NETWORK_ID = self::CHICKEN;
 
     public $width = 0.6;
-    public $length = (float) 0.6;
+    /** @var float */
+    public $length = 0.6;
     public $height = 0;
 
     public function getName(): string{

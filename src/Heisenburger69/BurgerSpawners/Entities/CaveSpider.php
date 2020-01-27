@@ -13,8 +13,9 @@ class CaveSpider extends Monster {
 
     public const NETWORK_ID = self::CAVE_SPIDER;
 
-    public $width = (int) 1;
-    public $length = (int) 1;
+    public $width = 1;
+    /** @var int */
+    public $length = 1;
     public $height = 0.5;
 
     public function getName(): string{
