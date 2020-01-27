@@ -8,13 +8,22 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - Get Spawners for any known entities
 - Ability to use Silk Touch on Spawners
 - UI to add more Spawners onto an existing Spawner
+- Entities registered within the plugin itself including Iron Golems and Guardians
 # Planned Additions
-- [ ] Register Mobs via the plugin itself
+- [x] Register Mobs via the plugin itself
 - [ ] Allow custom entities to be used in the Spawner
 - [ ] Allow removing of a specific number of Spawners from a Stacked Spawner
 - [ ] Config to modify plugin messages
 - [ ] Allow modifying base spawn rate for Spawners
 - [ ] Configurable Mob Drops
 - [ ] Revamp Mob Stacker and make it cleaner
+- [ ] Allow toggling XP Drops for Mobs
+- [ ] Spawner Shop with configurable prices
+- [ ] Set Mob Experience drops correctly
+- [ ] Implement Looting Enchantment
+- [ ] Autostack spawners when placed near another spawner of the same type.
 # Note
-This plugin only registers Zombie, Iron Golem and Squid Spawners for now. Additional Entities can be registered using a plugin such as PureEntitiesX.
+- Pandas drop Emeralds instead of Bamboo
+- Bats, Ocelots, Vex, Witches, Silverfish and Endermite have no drops
+- Sheep drop a random color of wool
+

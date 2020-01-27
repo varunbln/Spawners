@@ -6,12 +6,12 @@ namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Entity;
 
-class EntityManager extends Entity //Future Addition
+class EntityManager extends Entity //Teaspoon <3
 {
     public static function init(): void
     {
-        //self::registerEntity(Bat::class, true, ['Bat', 'minecraft:bat']);
-        /*self::registerEntity(Blaze::class, true, ['Blaze', 'minecraft:blaze']);
+        self::registerEntity(Bat::class, true, ['Bat', 'minecraft:bat']);
+        self::registerEntity(Blaze::class, true, ['Blaze', 'minecraft:blaze']);
         self::registerEntity(CaveSpider::class, true, ['CaveSpider', 'minecraft:cavespider']);
         self::registerEntity(Chicken::class, true, ['Chicken', 'minecraft:chicken']);
         self::registerEntity(Cow::class, true, ['Cow', 'minecraft:cow']);
@@ -24,15 +24,15 @@ class EntityManager extends Entity //Future Addition
         self::registerEntity(Ghast::class, true, ['Ghast', 'minecraft:ghast']);
         self::registerEntity(Guardian::class, true, ['Guardian', 'minecraft:guardian']);
         self::registerEntity(Horse::class, true, ['Horse', 'minecraft:horse']);
-        self::registerEntity(Husk::class, true, ['Husk', 'minecraft:husk']);*/
+        self::registerEntity(Husk::class, true, ['Husk', 'minecraft:husk']);
         self::registerEntity(IronGolem::class, true, ['IronGolem', 'minecraft:irongolem']);
-        /*self::registerEntity(Llama::class, true, ['Llama', 'minecraft:llama']);
+        self::registerEntity(Llama::class, true, ['Llama', 'minecraft:llama']);
         self::registerEntity(MagmaCube::class, true, ['MagmaCube', 'minecraft:magmacube']);
         self::registerEntity(Mooshroom::class, true, ['Mooshroom', 'minecraft:mooshroom']);
         self::registerEntity(Mule::class, true, ['Mule', 'minecraft:mule']);
-        self::registerEntity(Ocelot::class, true, ['Ocelot', 'minecraft:ocelot']);*/
-        //self::registerEntity(Panda::class, true, ['Panda', 'minecraft:panda']);
-        /*self::registerEntity(Parrot::class, true, ['Parrot', 'minecraft:parrot']);
+        self::registerEntity(Ocelot::class, true, ['Ocelot', 'minecraft:ocelot']);
+        self::registerEntity(Panda::class, true, ['Panda', 'minecraft:panda']);
+        self::registerEntity(Parrot::class, true, ['Parrot', 'minecraft:parrot']);
         self::registerEntity(Pig::class, true, ['Pig', 'minecraft:pig']);
         self::registerEntity(PigZombie::class, true, ['PigZombie', 'minecraft:pigzombie']);
         self::registerEntity(PolarBear::class, true, ['PolarBear', 'minecraft:polarbear']);
@@ -50,7 +50,6 @@ class EntityManager extends Entity //Future Addition
         self::registerEntity(Witch::class, true, ['Witch', 'minecraft:witch']);
         self::registerEntity(WitherSkeleton::class, true, ['WitherSkeleton', 'minecraft:witherskeleton']);
         self::registerEntity(Wolf::class, true, ['Wolf', 'minecraft:wolf']);
-        self::registerEntity(ZombieHorse::class, true, ['ZombieHorse', 'minecraft:zombiehorse']);
-        self::registerEntity(ZombieVillager::class, true, ['ZombieVillager', 'minecraft:zombievillager']);*/
+        self::registerEntity(ZombieVillager::class, true, ['ZombieVillager', 'minecraft:zombievillager']);
     }
 }

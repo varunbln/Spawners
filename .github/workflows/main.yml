@@ -18,6 +18,10 @@ jobs:
       uses: wei/wget@v1
       with:
         args: -O vendor/libFormAPI.phar https://poggit.pmmp.io/r/54590/libFormAPI_dev-2.phar
+    - name: wget virions, UpdateNotifier
+      uses: wei/wget@v1
+      with:
+        args: -O vendor/UpdateNotifier.phat https://poggit.pmmp.io/r/62162/UpdateNotifier_dev-3.phar
     - name: Run PHPStan
       uses: nxtlvlsoftware/pmmp-phpstan-action@3
       with:

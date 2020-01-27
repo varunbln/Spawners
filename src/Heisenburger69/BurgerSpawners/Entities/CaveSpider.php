@@ -1,0 +1,41 @@
+<?php
+
+
+namespace Heisenburger69\BurgerSpawners\Entities;
+
+
+use pocketmine\entity\Monster;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\item\Item;
+use pocketmine\Player;
+
+class CaveSpider extends Monster {
+
+    public const NETWORK_ID = self::CAVE_SPIDER;
+
+    public $width = 1;
+    public $length = 1;
+    public $height = 0.5;
+
+    public function getName(): string{
+        return "Cave Spider";
+    }
+
+    public function getDrops(): array{
+        $drops = [
+            Item::get(Item::STRING, 0, mt_rand(0, 2)),
+        ];
+
+        if(mt_rand(1, 3) == 2){
+            $lastDamage = $this->getLastDamageCause();
+            if($lastDamage instanceof EntityDamageByEntityEvent){
+                $ent = $lastDamage->getDamager();
+                if($ent instanceof Player){
+                    $drops[] = Item::get(Item::SPIDER_EYE, 0, 1);
+                }
+            }
+        }
+
+        return $drops;
+    }
+}

@@ -10,7 +10,7 @@ parameters:
         - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
     autoload_directories:
         - /source/src
-        - /src
-        - phar:///source/libFormAPI_dev-2.phar/src
+        - phar:///source/vendor/libFormAPI.phar/src
+        - phar:///source/vendor/UpdateNotifier.phar/src
     excludes_analyse:
-        - vendor
+        - source/vendor

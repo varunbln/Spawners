@@ -18,6 +18,11 @@ class IronGolem extends Animal
         return "Iron Golem";
     }
 
+    public function initEntity(): void{
+        $this->setMaxHealth(100);
+        parent::initEntity();
+    }
+
     public function getDrops(): array
     {
         $iron = Item::get(Item::IRON_INGOT, 0, mt_rand(1, 2));
