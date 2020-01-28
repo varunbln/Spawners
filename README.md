@@ -23,8 +23,10 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - [ ] Implement Looting Enchantment
 - [ ] Autostack spawners when placed near another spawner of the same type
 - [ ] Allow changing of the entity scale within the Spawner
+- [ ] Toggle spawning one every 20 seconds, or two every 40 seconds 
 # Note
-- Pandas drop Emeralds instead of Bamboo
-- Bats, Ocelots, Vex, Witches, Silverfish and Endermite have no drops
+- Pandas drop Sugarcane instead of Bamboo
+- Bats, Ocelots, Bees, Vex, Witches, Silverfish and Endermite have no drops
 - Sheep drop a random color of wool
+- Thanks to Muqsit for Bees and Foxes <3
 

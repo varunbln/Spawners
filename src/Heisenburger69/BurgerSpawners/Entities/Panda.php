@@ -22,7 +22,7 @@ class Panda extends Animal
 
     public function getDrops(): array
     {
-        $item = Item::get(Item::EMERALD, 0, mt_rand(1, 3));
+        $item = Item::get(Item::SUGARCANE, 0, mt_rand(1, 3));
         return [$item];
     }
 }

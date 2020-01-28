@@ -6,6 +6,7 @@ use Heisenburger69\BurgerSpawners\Main;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\entity\Entity;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;

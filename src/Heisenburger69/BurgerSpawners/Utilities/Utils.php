@@ -62,6 +62,8 @@ class Utils
             EntityIds::ZOMBIE_HORSE => "Zombie Horse",
             EntityIds::ZOMBIE_PIGMAN => "Zombie Pigman",
             EntityIds::ZOMBIE_VILLAGER => "Zombie Villager",
+            121 => "Fox",
+            122 => "Bee"
         ];
 
         return $names[$entityID] ?? "Monster";
@@ -74,6 +76,7 @@ class Utils
     {
         $names = [
             "bat",
+            "bee",
             "blaze",
             "cavespider",
             "chicken",
@@ -83,6 +86,7 @@ class Utils
             "elderguardian",
             "enderman",
             "endermite",
+            "fox",
             "ghast",
             "guardian",
             "horse",
@@ -126,6 +130,7 @@ class Utils
     {
         $names = [
             "bat" => EntityIds::BAT,
+            "bee" => 122,
             "blaze" => EntityIds::BLAZE,
             "cavespider" => EntityIds::CAVE_SPIDER,
             "chicken" => EntityIds::CHICKEN,
@@ -136,6 +141,7 @@ class Utils
             "elderguardian" => EntityIds::ELDER_GUARDIAN,
             "enderman" => EntityIds::ENDERMAN,
             "endermite" => EntityIds::ENDERMITE,
+            "fox" => 121,
             "ghast" => EntityIds::GHAST,
             "guardian" => EntityIds::GUARDIAN,
             "horse" => EntityIds::HORSE,

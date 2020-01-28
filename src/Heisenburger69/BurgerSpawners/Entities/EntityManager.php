@@ -11,6 +11,7 @@ class EntityManager extends Entity //Teaspoon <3
     public static function init(): void
     {
         self::registerEntity(Bat::class, true, ['Bat', 'minecraft:bat']);
+        self::registerEntity(Bee::class, true, ['Bee', 'minecraft:bee']);
         self::registerEntity(Blaze::class, true, ['Blaze', 'minecraft:blaze']);
         self::registerEntity(CaveSpider::class, true, ['CaveSpider', 'minecraft:cavespider']);
         self::registerEntity(Chicken::class, true, ['Chicken', 'minecraft:chicken']);
@@ -21,6 +22,7 @@ class EntityManager extends Entity //Teaspoon <3
         self::registerEntity(Enderman::class, true, ['Enderman', 'minecraft:enderman']);
         self::registerEntity(Endermite::class, true, ['Endermite', 'minecraft:endermite']);
         self::registerEntity(Evoker::class, true, ['Evoker', 'minecraft:evoker']);
+        self::registerEntity(Fox::class, true, ['Fox', 'minecraft:fox']);
         self::registerEntity(Ghast::class, true, ['Ghast', 'minecraft:ghast']);
         self::registerEntity(Guardian::class, true, ['Guardian', 'minecraft:guardian']);
         self::registerEntity(Horse::class, true, ['Horse', 'minecraft:horse']);
