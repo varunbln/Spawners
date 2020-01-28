@@ -16,7 +16,6 @@ class Ghast extends Monster {
     /** @var int */
     public $length = 6;
     public $height = 6;
-    public $lootingL;
 
     public function getName(): string{
         return "Ghast";
