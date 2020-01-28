@@ -40,25 +40,24 @@ class Fox extends Living
     }
 
     public function getDrops(): array{
-        $lootingL = 0;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
-            $damager = $cause->getDamager();
-            if($damager instanceof Player){
-                $looting = $damager->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();
                 }else{
-                    $lootingL = 0;
-                }
+                    $lootingL = 1;
+            }
             }
         }
-        $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1))];
+        $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1 * $lootingL))];
         if(mt_rand(1, 200) <= (5 + 2 * $lootingL)){
-            $drops[] = Item::get(Item::RABBIT_FOOT, 0, 1);
+            $drops[] = Item::get(Item::RABBIT_FOOT, 0, 1 * $lootingL);
         }
         if(mt_rand(1, 200) <= (5 + 2 * $lootingL)){
-            $drops[] = Item::get(Item::EMERALD, 0, 1);
+            $drops[] = Item::get(Item::EMERALD, 0, 1 * $lootingL);
         }
 
         return $drops;

@@ -6,6 +6,9 @@ namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Animal;
 use pocketmine\item\Item;
+use pocketmine\Player;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class Panda extends Animal
 {
@@ -22,7 +25,19 @@ class Panda extends Animal
 
     public function getDrops(): array
     {
-        $item = Item::get(Item::SUGARCANE, 0, mt_rand(1, 3));
+        $cause = $this->lastDamageCause;
+        if($cause instanceof EntityDamageByEntityEvent){
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+                if($looting !== null){
+                    $lootingL = $looting->getLevel();
+                }else{
+                    $lootingL = 1;
+            }
+            }
+        }
+        $item = Item::get(Item::SUGARCANE, 0, mt_rand(1, 3 * $lootingL));
         return [$item];
     }
 }

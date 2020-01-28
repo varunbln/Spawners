@@ -71,9 +71,9 @@ class Rabbit extends Animal {
                 }
             }
         }
-        $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1))];
+        $drops = [Item::get(Item::RABBIT_HIDE, 0, mt_rand(0, 1 * $lootingL))];
         if(mt_rand(1, 200) <= (5 + 2 * $lootingL)){
-            $drops[] = Item::get(Item::RABBIT_FOOT, 0, 1);
+            $drops[] = Item::get(Item::RABBIT_FOOT, 0, 1 * $lootingL);
         }
 
         return $drops;

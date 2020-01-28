@@ -28,10 +28,10 @@ class Sheep extends Animal {
                 if($looting !== null){
                     $lootingL = $looting->getLevel();
                 }else{
-                    $lootingL = 0;
+                    $lootingL = 1;
                 }
-                $drops = [Item::get(Item::WOOL, mt_rand(0, 15), 1)]; //TODO: Check proper color
-                $drops[] = Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 + $lootingL));
+                $drops = [Item::get(Item::WOOL, mt_rand(0, 15), 1 * $lootingL)]; //TODO: Check proper color
+                $drops[] = Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 * $lootingL));
 
                 return $drops;
             }

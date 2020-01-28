@@ -6,6 +6,8 @@ use Heisenburger69\BurgerSpawners\Pocketmine\AddActorPacket;
 
 use pocketmine\entity\Living;
 use pocketmine\Player;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class Bee extends Living
 {

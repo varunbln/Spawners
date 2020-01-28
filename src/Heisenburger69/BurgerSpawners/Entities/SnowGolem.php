@@ -11,6 +11,7 @@ use pocketmine\item\Shears;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\Player;
+use pocketmine\item\enchantment\Enchantment;
 
 class SnowGolem extends Monster {
 
@@ -31,6 +32,18 @@ class SnowGolem extends Monster {
     }
 
     public function getDrops(): array{
-        return [Item::get(Item::SNOWBALL, 0, mt_rand(0, 15))];
+        $cause = $this->lastDamageCause;
+        if($cause instanceof EntityDamageByEntityEvent){
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+                if($looting !== null){
+                    $lootingL = $looting->getLevel();
+                }else{
+                    $lootingL = 1;
+            }
+            }
+        }
+        return [Item::get(Item::SNOWBALL, 0, mt_rand(0, 15 * $lootingL))];
     }
 }

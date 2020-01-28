@@ -4,6 +4,9 @@ namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Animal;
 use pocketmine\item\Item;
+use pocketmine\Player;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class IronGolem extends Animal
 {
@@ -25,8 +28,20 @@ class IronGolem extends Animal
 
     public function getDrops(): array
     {
-        $iron = Item::get(Item::IRON_INGOT, 0, mt_rand(1, 2));
-        $rose = Item::get(Item::RED_FLOWER, 0, 1);
+        $cause = $this->lastDamageCause;
+        if($cause instanceof EntityDamageByEntityEvent){
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+                if($looting !== null){
+                    $lootingL = $looting->getLevel();
+                }else{
+                    $lootingL = 1;
+            }
+            }
+        }
+        $iron = Item::get(Item::IRON_INGOT, 0, mt_rand(1, 2 * $lootingL));
+        $rose = Item::get(Item::RED_FLOWER, 0, 1 * $lootingL);
         if(mt_rand(0, 5) === 0) {
             return [$iron, $rose];
         }
