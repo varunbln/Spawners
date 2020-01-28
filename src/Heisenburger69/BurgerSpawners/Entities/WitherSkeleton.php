@@ -24,6 +24,7 @@ class WitherSkeleton extends Skeleton {
     }
 
     public function getDrops(): array{
+        $lootingL = 1;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();

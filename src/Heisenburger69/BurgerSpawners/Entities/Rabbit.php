@@ -58,7 +58,7 @@ class Rabbit extends Animal {
     }
 
     public function getDrops(): array{
-        $lootingL = 0;
+        $lootingL = 1;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
             $damager = $cause->getDamager();
@@ -68,7 +68,7 @@ class Rabbit extends Animal {
                 if($looting !== null){
                     $lootingL = $looting->getLevel();
                 }else{
-                    $lootingL = 0;
+                    $lootingL = 1;
                 }
             }
         }

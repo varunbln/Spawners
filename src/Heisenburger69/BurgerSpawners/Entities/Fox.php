@@ -40,6 +40,7 @@ class Fox extends Living
     }
 
     public function getDrops(): array{
+        $lootingL = 1;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
