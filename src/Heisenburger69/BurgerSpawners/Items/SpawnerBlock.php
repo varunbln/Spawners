@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Items;
 
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
+use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\block\Block;
 use pocketmine\block\MonsterSpawner as PMSpawner;
@@ -79,7 +80,12 @@ class SpawnerBlock extends PMSpawner
                 $tile = Tile::createTile(Tile::MOB_SPAWNER, $this->getLevel(), $nbt);
                 if ($tile instanceof MobSpawnerTile) {
                     $tile->setEntityId($entityId);
-                    $tile->setEntityScale(1.3);
+                    $scale = ConfigManager::getValue("spawner-entity-scale");
+                    if(is_float($scale)) {
+                        $tile->setEntityScale($scale);
+                    } else {
+                        $tile->setEntityScale(1.8);
+                    }
                 }
             }
         }
@@ -113,7 +119,20 @@ class SpawnerBlock extends PMSpawner
     public function onBreak(Item $item, Player $player = null): bool
     {
         $parent = parent::onBreak($item, $player);
-        if ($item->hasEnchantment(Enchantment::SILK_TOUCH)) {
+        if(ConfigManager::getToggle("enable-silk-touch")) {
+            if ($item->hasEnchantment(Enchantment::SILK_TOUCH)) {
+                $tile = $this->getLevel()->getTile($this->asVector3());
+                if ($tile instanceof MobSpawnerTile) {
+                    $nbt = new CompoundTag("", [
+                        new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
+                    ]);
+                    $count = $tile->getCount();
+                    $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
+                    $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
+                    $this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
+                }
+            }
+        } else {
             $tile = $this->getLevel()->getTile($this->asVector3());
             if ($tile instanceof MobSpawnerTile) {
                 $nbt = new CompoundTag("", [

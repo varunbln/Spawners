@@ -106,14 +106,17 @@ class Mobstacker
         $event->call();
         $this->updateNameTag();
 
-        foreach ($drops as $drop) {
-            $entity->getLevel()->dropItem($entity->getPosition(), $drop);
+        if(ConfigManager::getToggle("mobs-drop-items")) {
+            foreach ($drops as $drop) {
+                $entity->getLevel()->dropItem($entity->getPosition(), $drop);
+            }
         }
-        $exp = $entity->getXpDropAmount();
-        if ($exp > 0) {
-            $entity->getLevel()->dropExperience($entity->asVector3(), $exp);
+        if(ConfigManager::getToggle("mobs-drop-exp")) {
+            $exp = $entity->getXpDropAmount();
+            if ($exp > 0) {
+                $entity->getLevel()->dropExperience($entity->asVector3(), $exp);
+            }
         }
-
         return true;
     }
 

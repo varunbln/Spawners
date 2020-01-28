@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners;
 
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
+use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
 use pocketmine\entity\Human;
@@ -57,10 +58,12 @@ class EventListener implements Listener
      */
     public function onSpawn(EntitySpawnEvent $event): void
     {
-        $entity = $event->getEntity();
-        if ($entity instanceof Human or !$entity instanceof Living) return;
-        $mobStacker = new Mobstacker($entity);
-        $mobStacker->stack();
+        if (ConfigManager::getToggle("allow-mob-stacking")) {
+            $entity = $event->getEntity();
+            if ($entity instanceof Human or !$entity instanceof Living) return;
+            $mobStacker = new Mobstacker($entity);
+            $mobStacker->stack();
+        }
     }
 
     /**
@@ -69,7 +72,7 @@ class EventListener implements Listener
     public function onPlaceSpawner(PlayerInteractEvent $event): void
     {
         $item = $event->getItem();
-        if($item instanceof Pickaxe) {
+        if ($item instanceof Pickaxe) {
             return;
         }
         $nbt = $item->getNamedTag();
@@ -81,14 +84,18 @@ class EventListener implements Listener
             if (!$tile instanceof MobSpawnerTile) {
                 return;
             }
-            Forms::sendSpawnerForm($tile, $player);
+            if (ConfigManager::getToggle("allow-spawner-stacking")) {
+                Forms::sendSpawnerForm($tile, $player);
+            }
             $event->setCancelled(true);
             return;
         }
         if (!$tile instanceof MobSpawnerTile) {
             return;
         }
-        Forms::sendSpawnerForm($tile, $player);
+        if (ConfigManager::getToggle("allow-spawner-stacking")) {
+            Forms::sendSpawnerForm($tile, $player);
+        }
         $event->setCancelled(true);
     }
 

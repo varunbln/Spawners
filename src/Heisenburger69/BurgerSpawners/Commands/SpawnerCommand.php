@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Commands;
 
 use Heisenburger69\BurgerSpawners\Main;
+use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
@@ -96,7 +97,12 @@ class SpawnerCommand extends PluginCommand
         $spawner->setCustomName(C::RESET . $spawnerName);
 
         if ($player instanceof Player) {
-            $sender->sendMessage(Main::PREFIX . C::GREEN . "Player " . C::DARK_BLUE . $player->getName() . C::GREEN . " has been given an " . C::DARK_BLUE . $spawnerName);
+
+            $message = ConfigManager::getMessage("player-given-spawner");
+            $message = str_replace("{player}", $args[2], $message);
+            $message = str_replace("{spawner}", $spawnerName, $message);
+
+            $sender->sendMessage(Main::PREFIX . $message);
             $player->getInventory()->addItem($spawner);
             return true;
         } else {

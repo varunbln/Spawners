@@ -2,6 +2,7 @@
 
 namespace Heisenburger69\BurgerSpawners\Tiles;
 
+use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\entity\Entity;
@@ -57,11 +58,17 @@ class MobSpawnerTile extends Spawnable
         if (!$nbt->hasTag(self::SPAWN_RANGE, IntTag::class)) {
             $nbt->setInt(self::SPAWN_RANGE, 4, true);
         }
+        $base = ConfigManager::getValue("base-spawn-rate");
+        if (is_float($base)) {
+            $base = $base * 20;
+        } else {
+            $base = 800;
+        }
         if (!$nbt->hasTag(self::BASE_DELAY, IntTag::class)) {
-            $nbt->setInt(self::BASE_DELAY, 800, true);
+            $nbt->setInt(self::BASE_DELAY, $base, true);
         }
         if (!$nbt->hasTag(self::DELAY, IntTag::class)) {
-            $nbt->setInt(self::DELAY, 800, true);
+            $nbt->setInt(self::DELAY, $base, true);
         }
         if (!$nbt->hasTag(self::COUNT, IntTag::class)) {
             $nbt->setInt(self::COUNT, 1, true);

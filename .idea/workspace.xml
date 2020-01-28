@@ -16,6 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/../../../pmmp" />
@@ -88,7 +89,9 @@
       <workItem from="1580194009650" duration="246000" />
       <workItem from="1580194291591" duration="411000" />
       <workItem from="1580194744626" duration="148000" />
-      <workItem from="1580195046316" duration="694000" />
+      <workItem from="1580195046316" duration="873000" />
+      <workItem from="1580196416796" duration="466000" />
+      <workItem from="1580199245524" duration="3902000" />
     </task>
     <servers />
   </component>

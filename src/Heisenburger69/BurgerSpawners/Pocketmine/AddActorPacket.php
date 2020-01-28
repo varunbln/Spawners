@@ -111,7 +111,7 @@ class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
         121 => "minecraft:fox"
     ];
 
-    protected function encodePayload()
+    protected function encodePayload(): void
     {
         $this->putEntityUniqueId($this->entityUniqueId ?? $this->entityRuntimeId);
         $this->putEntityRuntimeId($this->entityRuntimeId);

@@ -72,13 +72,15 @@ class Forms
                         $stackCount = $item->getCount();
                         $max = $stackCount;
                     } else {
-                        $player->sendMessage(Main::PREFIX . C::RED . "You do not have any spawners of this type in your hand!");
+                        $message = ConfigManager::getMessage("no-available-spawners");
+                        $player->sendMessage(Main::PREFIX . $message);
                         return;
                     }
 
                     if ($count > $max) {
                         $count = $max;
-                        $player->sendMessage(Main::PREFIX . C::GOLD . "All available spawners stacked.");
+                        $message = ConfigManager::getMessage("all-spawners-stacked");
+                        $player->sendMessage(Main::PREFIX . $message);
                     }
 
                     $item = $player->getInventory()->getItemInHand();
