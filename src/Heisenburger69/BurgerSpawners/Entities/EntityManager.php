@@ -52,6 +52,7 @@ class EntityManager extends Entity //Teaspoon <3
         self::registerEntity(Witch::class, true, ['Witch', 'minecraft:witch']);
         self::registerEntity(WitherSkeleton::class, true, ['WitherSkeleton', 'minecraft:witherskeleton']);
         self::registerEntity(Wolf::class, true, ['Wolf', 'minecraft:wolf']);
+        self::registerEntity(Zombie::class, true, ['Zombie', 'minecraft:zombie']);
         self::registerEntity(ZombieVillager::class, true, ['ZombieVillager', 'minecraft:zombievillager']);
     }
 }

@@ -20,18 +20,20 @@ class Sheep extends Animal {
     }
 
     public function getDrops(): array{
+        $lootingL = 1;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
             $damager = $cause->getDamager();
             if($damager instanceof Player){
+           
                 $looting = $damager->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();
                 }else{
-                    $lootingL = 0;
+                    $lootingL = 1;
                 }
-                $drops = [Item::get(Item::WOOL, mt_rand(0, 15), 1)]; //TODO: Check proper color
-                $drops[] = Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 + $lootingL));
+                $drops = [Item::get(Item::WOOL, mt_rand(0, 15), 1 * $lootingL)]; //TODO: Check proper color
+                $drops[] = Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 * $lootingL));
 
                 return $drops;
             }

@@ -6,6 +6,9 @@ use pocketmine\entity\{
     Entity, Monster
 };
 use pocketmine\item\Item;
+use pocketmine\Player;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class Shulker extends Monster {
 
@@ -25,7 +28,21 @@ class Shulker extends Monster {
     }
 
     public function getDrops(): array{
-        return [Item::get(Item::SHULKER_SHELL, 0, mt_rand(0, 1))];
+        $lootingL = 1;
+        $cause = $this->lastDamageCause;
+        if($cause instanceof EntityDamageByEntityEvent){
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
+               
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+                if($looting !== null){
+                    $lootingL = $looting->getLevel();
+                }else{
+                    $lootingL = 1;
+            }
+            }
+        }
+        return [Item::get(Item::SHULKER_SHELL, 0, mt_rand(0, 1 * $lootingL))];
     }
 
     public function knockBack(Entity $attacker, float $damage, float $x, float $z, float $base = 0.4): void{

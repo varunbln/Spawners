@@ -20,17 +20,23 @@ class Mooshroom extends Animal {
     }
 
     public function getDrops(): array{
-        $lootingL = 0;
+        $lootingL = 1;
         $cause = $this->lastDamageCause;
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
-                $lootingL = $dmg->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::LOOTING);
+           
+                $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
+                if($looting !== null){
+                    $lootingL = $looting->getLevel();
+                }else{
+                    $lootingL = 1;
+            }
             }
         }
         return [
-            Item::get(Item::RAW_BEEF, 0, mt_rand(1, 3 + $lootingL)),
-            Item::get(Item::LEATHER, 0, mt_rand(0, 2 + $lootingL)),
+            Item::get(Item::RAW_BEEF, 0, mt_rand(1, 3 * $lootingL)),
+            Item::get(Item::LEATHER, 0, mt_rand(0, 2 * $lootingL)),
         ];
     }
 }
