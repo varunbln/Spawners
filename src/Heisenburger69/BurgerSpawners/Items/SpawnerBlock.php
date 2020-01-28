@@ -81,11 +81,7 @@ class SpawnerBlock extends PMSpawner
                 if ($tile instanceof MobSpawnerTile) {
                     $tile->setEntityId($entityId);
                     $scale = ConfigManager::getValue("spawner-entity-scale");
-                    if(is_float($scale)) {
-                        $tile->setEntityScale($scale);
-                    } else {
-                        $tile->setEntityScale(1.8);
-                    }
+                    $tile->setEntityScale($scale);
                 }
             }
         }
@@ -119,7 +115,7 @@ class SpawnerBlock extends PMSpawner
     public function onBreak(Item $item, Player $player = null): bool
     {
         $parent = parent::onBreak($item, $player);
-        if(ConfigManager::getToggle("enable-silk-touch")) {
+        if (ConfigManager::getToggle("enable-silk-touch")) {
             if ($item->hasEnchantment(Enchantment::SILK_TOUCH)) {
                 $tile = $this->getLevel()->getTile($this->asVector3());
                 if ($tile instanceof MobSpawnerTile) {
