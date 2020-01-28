@@ -99,7 +99,7 @@ class SpawnerCommand extends PluginCommand
         if ($player instanceof Player) {
 
             $message = ConfigManager::getMessage("player-given-spawner");
-            $message = str_replace("{player}", $args[2], $message);
+            $message = str_replace("{player}", $player->getName(), $message);
             $message = str_replace("{spawner}", $spawnerName, $message);
 
             $sender->sendMessage(Main::PREFIX . $message);

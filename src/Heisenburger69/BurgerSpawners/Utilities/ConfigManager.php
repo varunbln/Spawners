@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Utilities;
 
 use Heisenburger69\BurgerSpawners\Main;
+use pocketmine\utils\TextFormat as C;
 
 class ConfigManager
 {
@@ -13,6 +14,7 @@ class ConfigManager
     public static function getMessage(string $messageTag): string
     {
         $message = (string) Main::getInstance()->getConfig()->get($messageTag);
+        $message = C::colorize($message);
         return $message;
     }
 
