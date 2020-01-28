@@ -14,6 +14,7 @@ class PigZombie extends Monster {
 
     public $width = 0.6;
     public $height = 1.95;
+    public $lootingL;
 
     public function getName(): string{
         return "Zombie Pigman";

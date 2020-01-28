@@ -14,6 +14,7 @@ class Pig extends Animal {
 
     public $width = 0.9;
     public $height = 0.9;
+    public $lootingL;
 
     public function getName(): string{
         return "Pig";

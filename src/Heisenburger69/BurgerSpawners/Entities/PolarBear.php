@@ -14,6 +14,7 @@ class PolarBear extends Monster {
 
     public $width = 1.3;
     public $height = 1.4;
+    public $lootingL;
 
     public function getName(): string{
         return "Polar Bear";

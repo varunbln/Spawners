@@ -16,6 +16,7 @@ class Enderman extends Monster {
     /** @var float */
     public $length = 0.9;
     public $height = 1.8;
+    public $lootingL;
 
     public function getName(): string{
         return "Enderman";

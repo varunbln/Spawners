@@ -14,6 +14,7 @@ class Mooshroom extends Animal {
 
     public $width = 0.9;
     public $height = 1.4;
+    public $lootingL;
 
     public function getName(): string{
         return "Mooshroom";

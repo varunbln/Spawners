@@ -13,6 +13,7 @@ class WitherSkeleton extends Skeleton {
 
     public $width = 0.7;
     public $height = 2.4;
+    public $lootingL;
 
     public function getName(): string{
         return "Wither Skeleton";

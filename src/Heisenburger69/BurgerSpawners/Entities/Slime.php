@@ -15,6 +15,7 @@ class Slime extends Living {
 
     public $width = 2.04;
     public $height = 2.04;
+    public $lootingL;
 
     public function getName(): string{
         return "Slime";

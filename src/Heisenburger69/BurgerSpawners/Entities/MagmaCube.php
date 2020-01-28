@@ -11,6 +11,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 class MagmaCube extends Monster {
 
     public const NETWORK_ID = self::MAGMA_CUBE;
+    public $lootingL;
 
     public function getName(): string{
         return "Magma Cube";

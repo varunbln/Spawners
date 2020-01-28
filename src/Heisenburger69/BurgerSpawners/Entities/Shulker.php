@@ -16,6 +16,7 @@ class Shulker extends Monster {
 
     public $width = 1;
     public $height = 1;
+    public $lootingL;
 
     public function getName(): string{
         return "Shulker";

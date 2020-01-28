@@ -17,6 +17,7 @@ class Spider extends Monster {
 
     public $width = 1.4;
     public $height = 0.9;
+    public $lootingL;
 
     public function getName(): string{
         return "Spider";

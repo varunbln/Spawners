@@ -15,6 +15,7 @@ class Blaze extends Monster
 
     public $width = 0.6;
     public $height = 1.8;
+    public $lootingL;
 
     public function getName(): string{
         return "Blaze";

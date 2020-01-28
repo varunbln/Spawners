@@ -11,8 +11,8 @@ use pocketmine\item\Shears;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\Player;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\item\enchantment\Enchantment;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class SnowGolem extends Monster {
 
@@ -21,6 +21,7 @@ class SnowGolem extends Monster {
 
     public $width = 0.7;
     public $height = 1.9;
+    public $lootingL;
 
     public function getName(): string{
         return "Snow Golem";

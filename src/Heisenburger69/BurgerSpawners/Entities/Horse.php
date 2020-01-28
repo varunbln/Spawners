@@ -13,6 +13,7 @@ class Horse extends Animal
 
     public $width = 2;
     public $height = 3;
+    public $lootingL;
 
     public const NETWORK_ID = self::HORSE;
 

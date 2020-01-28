@@ -14,6 +14,7 @@ class Wolf extends Animal {
 
     public $width = 0.6;
     public $height = 0.85;
+    public $lootingL;
 
     public function getName(): string{
         return "Wolf";

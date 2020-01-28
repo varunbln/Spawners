@@ -15,6 +15,7 @@ class Guardian extends Monster
 
     public $width = 0.85;
     public $height = 0.85;
+    public $lootingL;
 
     public function getName(): string
     {

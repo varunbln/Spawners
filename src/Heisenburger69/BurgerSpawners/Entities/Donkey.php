@@ -17,6 +17,7 @@ class Donkey extends Animal
     /** @var float */
     public $length = 0.9;
     public $height = 0;
+    public $lootingL;
 
     public function getName(): string
     {

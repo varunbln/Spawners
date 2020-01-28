@@ -14,6 +14,7 @@ class Skeleton extends Monster {
 
     public $height = 1.99;
     public $width = 0.6;
+    public $lootingL;
 
     public function getName(): string{
         return "Skeleton";

@@ -14,6 +14,7 @@ class Parrot extends Animal {
 
     public $height = 0.9;
     public $width = 0.5;
+    public $lootingL;
 
     public function getName(): string{
         return "Parrot";

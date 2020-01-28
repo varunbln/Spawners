@@ -17,6 +17,7 @@ class Panda extends Animal
 
     public $width = 1.2;
     public $height = 1.2;
+    public $lootingL;
 
     public function getName(): string
     {

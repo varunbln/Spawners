@@ -14,6 +14,7 @@ class Mule extends Animal {
 
     public $width = 1.3965;
     public $height = 1.6;
+    public $lootingL;
 
     public function getName(): string{
         return "Mule";

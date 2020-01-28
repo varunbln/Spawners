@@ -23,6 +23,7 @@ class Rabbit extends Animal {
     public const TAG_RABBIT_TYPE = "RabbitType";
     public $width = 0.4;
     public $height = 0.5;
+    public $lootingL;
 
     public function initEntity(): void{
         $type = $this->getRandomRabbitType();

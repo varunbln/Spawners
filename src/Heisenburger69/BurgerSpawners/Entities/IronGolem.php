@@ -15,6 +15,7 @@ class IronGolem extends Animal
 
     public $width = 1.4;
     public $height = 2.7;
+    public $lootingL;
 
     public function getName(): string
     {

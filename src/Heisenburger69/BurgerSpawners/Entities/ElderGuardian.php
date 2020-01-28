@@ -16,6 +16,7 @@ class ElderGuardian extends Monster {
 
     public $width = 1.9975;
     public $height = 1.9975;
+    public $lootingL;
 
     public function getName(): string{
         return "Elder Guardian";
