@@ -16,7 +16,6 @@ class ElderGuardian extends Monster {
 
     public $width = 1.9975;
     public $height = 1.9975;
-    public $lootingL;
 
     public function getName(): string{
         return "Elder Guardian";
@@ -27,6 +26,7 @@ class ElderGuardian extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

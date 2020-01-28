@@ -21,7 +21,7 @@ class SnowGolem extends Monster {
 
     public $width = 0.7;
     public $height = 1.9;
-    public $lootingL;
+  
 
     public function getName(): string{
         return "Snow Golem";
@@ -38,6 +38,7 @@ class SnowGolem extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

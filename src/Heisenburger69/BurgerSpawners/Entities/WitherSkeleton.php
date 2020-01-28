@@ -13,7 +13,6 @@ class WitherSkeleton extends Skeleton {
 
     public $width = 0.7;
     public $height = 2.4;
-    public $lootingL;
 
     public function getName(): string{
         return "Wither Skeleton";
@@ -29,6 +28,7 @@ class WitherSkeleton extends Skeleton {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

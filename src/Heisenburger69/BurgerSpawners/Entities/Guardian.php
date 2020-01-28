@@ -15,7 +15,6 @@ class Guardian extends Monster
 
     public $width = 0.85;
     public $height = 0.85;
-    public $lootingL;
 
     public function getName(): string
     {
@@ -34,6 +33,7 @@ class Guardian extends Monster
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

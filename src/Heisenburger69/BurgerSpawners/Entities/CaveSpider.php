@@ -19,7 +19,6 @@ class CaveSpider extends Monster {
     /** @var int */
     public $length = 1;
     public $height = 0.5;
-    public $lootingL;
 
     public function getName(): string{
         return "Cave Spider";
@@ -30,6 +29,7 @@ class CaveSpider extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

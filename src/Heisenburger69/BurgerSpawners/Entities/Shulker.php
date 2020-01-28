@@ -16,7 +16,6 @@ class Shulker extends Monster {
 
     public $width = 1;
     public $height = 1;
-    public $lootingL;
 
     public function getName(): string{
         return "Shulker";
@@ -33,6 +32,7 @@ class Shulker extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

@@ -15,7 +15,6 @@ class Blaze extends Monster
 
     public $width = 0.6;
     public $height = 1.8;
-    public $lootingL;
 
     public function getName(): string{
         return "Blaze";
@@ -26,6 +25,8 @@ class Blaze extends Monster
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                 
+/** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

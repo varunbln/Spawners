@@ -23,7 +23,6 @@ class Rabbit extends Animal {
     public const TAG_RABBIT_TYPE = "RabbitType";
     public $width = 0.4;
     public $height = 0.5;
-    public $lootingL;
 
     public function initEntity(): void{
         $type = $this->getRandomRabbitType();
@@ -64,6 +63,7 @@ class Rabbit extends Animal {
         if($cause instanceof EntityDamageByEntityEvent){
             $damager = $cause->getDamager();
             if($damager instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $damager->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

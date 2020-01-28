@@ -14,7 +14,6 @@ class Mooshroom extends Animal {
 
     public $width = 0.9;
     public $height = 1.4;
-    public $lootingL;
 
     public function getName(): string{
         return "Mooshroom";
@@ -25,6 +24,7 @@ class Mooshroom extends Animal {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

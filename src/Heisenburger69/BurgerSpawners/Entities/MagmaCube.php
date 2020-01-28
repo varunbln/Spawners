@@ -11,7 +11,6 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 class MagmaCube extends Monster {
 
     public const NETWORK_ID = self::MAGMA_CUBE;
-    public $lootingL;
 
     public function getName(): string{
         return "Magma Cube";
@@ -23,6 +22,7 @@ class MagmaCube extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

@@ -16,7 +16,6 @@ class Enderman extends Monster {
     /** @var float */
     public $length = 0.9;
     public $height = 1.8;
-    public $lootingL;
 
     public function getName(): string{
         return "Enderman";
@@ -27,6 +26,7 @@ class Enderman extends Monster {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+               /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

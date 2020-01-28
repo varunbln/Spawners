@@ -15,7 +15,6 @@ class IronGolem extends Animal
 
     public $width = 1.4;
     public $height = 2.7;
-    public $lootingL;
 
     public function getName(): string
     {
@@ -33,6 +32,7 @@ class IronGolem extends Animal
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

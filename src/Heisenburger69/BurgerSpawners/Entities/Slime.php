@@ -15,7 +15,6 @@ class Slime extends Living {
 
     public $width = 2.04;
     public $height = 2.04;
-    public $lootingL;
 
     public function getName(): string{
         return "Slime";
@@ -26,6 +25,7 @@ class Slime extends Living {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

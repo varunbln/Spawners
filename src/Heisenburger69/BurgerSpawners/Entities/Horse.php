@@ -13,7 +13,6 @@ class Horse extends Animal
 
     public $width = 2;
     public $height = 3;
-    public $lootingL;
 
     public const NETWORK_ID = self::HORSE;
 
@@ -28,6 +27,7 @@ class Horse extends Animal
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

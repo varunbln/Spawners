@@ -14,7 +14,7 @@ class Wolf extends Animal {
 
     public $width = 0.6;
     public $height = 0.85;
-    public $lootingL;
+
 
     public function getName(): string{
         return "Wolf";
@@ -26,6 +26,7 @@ class Wolf extends Animal {
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

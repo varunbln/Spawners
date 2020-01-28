@@ -14,7 +14,6 @@ class Sheep extends Animal {
 
     public $width = 0.9;
     public $height = 1.3;
-    public $lootingL;
 
     public function getName(): string{
         return "Sheep";
@@ -25,6 +24,7 @@ class Sheep extends Animal {
         if($cause instanceof EntityDamageByEntityEvent){
             $damager = $cause->getDamager();
             if($damager instanceof Player){
+                /** @var Enchantment $looting */
                 $looting = $damager->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();

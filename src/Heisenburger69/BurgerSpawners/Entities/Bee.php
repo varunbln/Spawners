@@ -16,7 +16,6 @@ class Bee extends Living
 
     public $width = 0.6;
     public $height = 0.6;
-    public $lootingL;
 
     public function getName(): string
     {
