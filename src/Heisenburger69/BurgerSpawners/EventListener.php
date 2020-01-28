@@ -86,8 +86,8 @@ class EventListener implements Listener
             }
             if (ConfigManager::getToggle("allow-spawner-stacking")) {
                 Forms::sendSpawnerForm($tile, $player);
+                $event->setCancelled(true);
             }
-            $event->setCancelled(true);
             return;
         }
         if (!$tile instanceof MobSpawnerTile) {
@@ -95,8 +95,8 @@ class EventListener implements Listener
         }
         if (ConfigManager::getToggle("allow-spawner-stacking")) {
             Forms::sendSpawnerForm($tile, $player);
+            $event->setCancelled(true);
         }
-        $event->setCancelled(true);
     }
 
 

@@ -17,6 +17,7 @@ register-mobs: true
 allow-spawner-stacking: true
 
 # While this is true, Mobs are stacked onto each other. If this is set to false, mobs will be individual entities instead
+# If this is disabled, Mobs will always drop items and Experience.
 allow-mob-stacking: true
 
 # Setting this to false makes mobs drop no Exp. This also ignores any Mob Experience Values set
@@ -36,6 +37,7 @@ base-spawn-rate: 40
 
 # This is the Entity Scale within the Spawner. The size of the entity inside the spawner can be configured
 # using this. A too high or a too low value won't show. The optimal range is between 1-2.
+# Some mobs, for example, Ghasts don't display higher values
 spawner-entity-scale: 1.8
 
 # Plugin Messages:
