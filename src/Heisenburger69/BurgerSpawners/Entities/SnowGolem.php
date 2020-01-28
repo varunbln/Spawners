@@ -11,6 +11,7 @@ use pocketmine\item\Shears;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\Player;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\item\enchantment\Enchantment;
 
 class SnowGolem extends Monster {
