@@ -10,6 +10,8 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - UI to add more Spawners onto an existing Spawner
 - Entities registered within the plugin itself including Iron Golems, Bees and Foxes
 - Configurable Options to modify XP drops, Spawner Rates, Mob and Spawner Stacking, Silk Touch and Entity Scale
+- Auto Stack spawners
+- Basic implementation for looting drops.
 # Planned Additions
 - [x] Register Mobs via the plugin itself
 - [ ] Allow custom entities to be used in the Spawner
