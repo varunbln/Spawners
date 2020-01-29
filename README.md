@@ -22,7 +22,7 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - [ ] Spawner Shop with configurable prices
 - [ ] Set Mob Experience drops correctly
 - [x] Implement Looting Enchantment
-- [ ] Autostack spawners when placed near another spawner of the same type
+- [x] Autostack spawners when placed near another spawner of the same type
 - [x] Allow changing of the entity scale within the Spawner
 - [ ] Toggle spawning one every 20 seconds, or two every 40 seconds 
 # Note
