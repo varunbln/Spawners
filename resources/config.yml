@@ -35,6 +35,14 @@ enable-silk-touch: true
 # If you set this value to 20, a single unstacked Zombie Spawner will spawn one Zombie every 20 seconds.
 base-spawn-rate: 40
 
+# This is the spawn range, from how far you can be from a spawner in order for it to continue spawning.
+# Example: If the spawn-range is 16, then mob spawning from your point of view would go upto 16 blocks.
+# People have to note that spawn-range isn't in chunks. It's in blocks.
+# Recommended setting - Don't put it below 4, anything higher than 4 will do.
+# Highest to go: 16, but you can do more. Whatever suits your needs.
+# Default: 8
+spawn-range: 8
+  
 # This is the Entity Scale within the Spawner. The size of the entity inside the spawner can be configured
 # using this. A too high or a too low value won't show. The optimal range is between 1-2.
 # Some mobs, for example, Ghasts don't display higher values

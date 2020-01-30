@@ -49,14 +49,16 @@ class MobSpawnerTile extends Spawnable
             $nbt->removeTag(self::BASE_DELAY);
             $nbt->removeTag(self::COUNT);
         }
+        $range = (int)ConfigManager::getValue("spawn-range");
         if (!$nbt->hasTag(self::LOAD_RANGE, IntTag::class)) {
-            $nbt->setInt(self::LOAD_RANGE, 15, true);
+            $nbt->setInt(self::LOAD_RANGE, $range, true);
         }
         if (!$nbt->hasTag(self::ENTITY_ID, IntTag::class)) {
             $nbt->setInt(self::ENTITY_ID, 0, true);
         }
+    
         if (!$nbt->hasTag(self::SPAWN_RANGE, IntTag::class)) {
-            $nbt->setInt(self::SPAWN_RANGE, 4, true);
+            $nbt->setInt(self::SPAWN_RANGE, 4, true); //todo configure?
         }
         $base = (int)ConfigManager::getValue("base-spawn-rate");
         $base = $base * 20;
