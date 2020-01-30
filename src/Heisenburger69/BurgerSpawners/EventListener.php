@@ -66,40 +66,33 @@ class EventListener implements Listener
             $mobStacker->stack();
         }
     }
-    public function onPlaceSpawner(BlockPlaceEvent $event): void{
-
+        /**
+     * @param BlockPlaceEvent $event
+     */
+    public function onPlaceSpawner(BlockPlaceEvent $event): void
+    {
         $player = $event->getPlayer();
-
         $item = $event->getItem();
-
         $block = $event->getBlock();
         $nbt = $item->getNamedTag();
         $player = $event->getPlayer();
         $vec3 = $event->getBlock()->asVector3();
         $level = $player->getLevel();
-    //    $tile = $level->getTile($vec3);
     $tiles = $block->getLevel()->getChunkTiles($block->getX() >> 4, $block->getZ() >> 4);
-
     foreach($tiles as $tile){
-
-        if($tile instanceof MobSpawnerTile){
-            if (ConfigManager::getToggle("allow-spawner-stacking")) {
-            if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
-           //         if (!$nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
-
-                        $tile->setCount($tile->getCount() + 1);
-
-
-
-                        $player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
-
-                        $event->setCancelled();
-
-                    }
-                }
-            }
+        if(!$tile instanceof MobSpawnerTile){
+            return;
         }
+        if (ConfigManager::getToggle("allow-spawner-stacking")) {
+        if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
+            $tile->setCount($tile->getCount() + 1);
+            $player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
+            $event->setCancelled();
+        }
+        }
+     }
     }
+   }
             
     /**
      * @param PlayerInteractEvent $event
