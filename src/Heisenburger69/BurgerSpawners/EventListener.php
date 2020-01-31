@@ -14,6 +14,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
+use pocketmine\event\block\BlockPlaceEvent;
 
 /**
  * Class EventListener
@@ -65,11 +66,39 @@ class EventListener implements Listener
             $mobStacker->stack();
         }
     }
-
+        /**
+     * @param BlockPlaceEvent $event
+     */
+    public function onPlaceSpawner(BlockPlaceEvent $event): void
+    {
+        $player = $event->getPlayer();
+        $item = $event->getItem();
+        $block = $event->getBlock();
+        $nbt = $item->getNamedTag();
+        $player = $event->getPlayer();
+        $vec3 = $event->getBlock()->asVector3();
+        $level = $player->getLevel();
+    $tiles = $block->getLevel()->getChunkTiles($block->getX() >> 4, $block->getZ() >> 4);
+    foreach($tiles as $tile){
+        if(!$tile instanceof MobSpawnerTile){
+            return;
+        }
+        if (ConfigManager::getToggle("allow-spawner-stacking")) {
+        if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
+            $tile->setCount($tile->getCount() + 1);
+            $player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
+            $event->setCancelled();
+        }
+        }
+     }
+     
+   }
+   
+            
     /**
      * @param PlayerInteractEvent $event
      */
-    public function onPlaceSpawner(PlayerInteractEvent $event): void
+    public function onInteractSpawner(PlayerInteractEvent $event): void
     {
         $item = $event->getItem();
         if ($item instanceof Pickaxe) {
@@ -98,6 +127,5 @@ class EventListener implements Listener
             $event->setCancelled(true);
         }
     }
-
 
 }
