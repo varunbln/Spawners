@@ -49,7 +49,7 @@ class Forms
         $form->setContent(C::BOLD . C::AQUA . "Count: " . C::RESET . $count);
         $form->addButton(C::BOLD . C::GOLD . "Add Spawners");
         $form->addButton(C::BOLD . C::RED . "Close");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public static function sendAddSpawnerForm(Player $player, MobSpawnerTile $spawner): void
@@ -64,8 +64,6 @@ class Forms
 
                     $entityId = $spawner->getEntityId();
                     $count = (int)$response[1];
-                    $inv = $player->getInventory()->getContents();
-                    $max = 1;
 
                     $item = $player->getInventory()->getItemInHand();
                     if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $entityId) {
@@ -104,7 +102,6 @@ class Forms
         $spawnerName = $spawner->getName();
         $count = $spawner->getCount();
         $entityId = $spawner->getEntityId();
-        $inv = $player->getInventory()->getContents();
 
         $max = 1;
 
@@ -117,6 +114,6 @@ class Forms
         $form->setTitle(C::BOLD . C::DARK_BLUE . $spawnerName);
         $form->addLabel(C::BOLD . C::AQUA . "Count: " . C::RESET . $count);
         $form->addSlider(C::BOLD . C::GOLD . "Number of spawners to add" . C::YELLOW, 1, $max, 1);
-        $form->sendToPlayer($player);
-    }
+		$player->sendForm($form);
+	}
 }
