@@ -12,5 +12,6 @@ parameters:
         - /source/src
         - phar:///source/vendor/libFormAPI.phar/src
         - phar:///source/vendor/UpdateNotifier.phar/src
+        - phar:///source/vendor/ConfigUpdater.phar/src
     excludes_analyse:
         - source/vendor

@@ -25,6 +25,8 @@ use JackMD\ConfigNotifier\ConfigUpdater;
 class Main extends PluginBase
 {
 
+	/** @var int  */
+	private const CFGVERSION = 1;
     /** @var string */
     public const PREFIX = C::BOLD . C::AQUA . "Burger" . C::LIGHT_PURPLE . "Spawners" . "> " . C::RESET;
 
@@ -49,6 +51,7 @@ class Main extends PluginBase
         if(ConfigManager::getToggle("register-mobs")) {
             EntityManager::init();
         }
+        ConfigUpdater::checkUpdate($this, $this->getConfig(), "config-ver", self::CFGVERSION);
 
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
