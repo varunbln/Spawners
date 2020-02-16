@@ -115,31 +115,19 @@ class SpawnerBlock extends PMSpawner
     public function onBreak(Item $item, Player $player = null): bool
     {
         $parent = parent::onBreak($item, $player);
-        if (ConfigManager::getToggle("enable-silk-touch")) {
-            if ($item->hasEnchantment(Enchantment::SILK_TOUCH)) {
-                $tile = $this->getLevel()->getTile($this->asVector3());
-                if ($tile instanceof MobSpawnerTile) {
-                    $nbt = new CompoundTag("", [
-                        new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
-                    ]);
-                    $count = $tile->getCount();
-                    $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
-                    $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
-                    $this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
-                }
-            }
-        } else {
-            $tile = $this->getLevel()->getTile($this->asVector3());
-            if ($tile instanceof MobSpawnerTile) {
-                $nbt = new CompoundTag("", [
-                    new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
-                ]);
-                $count = $tile->getCount();
-                $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
-                $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
-                $this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
-            }
+        if (ConfigManager::getToggle("enable-silk-touch") && !$item->hasEnchantment(Enchantment::SILK_TOUCH)) {
+            return $parent;
         }
+		$tile = $this->getLevel()->getTile($this->asVector3());
+		if ($tile instanceof MobSpawnerTile) {
+			$nbt = new CompoundTag("", [
+				new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
+			]);
+			$count = $tile->getCount();
+			$spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
+			$spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
+			$this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
+		}
         return $parent;
     }
 }

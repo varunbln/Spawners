@@ -8,6 +8,7 @@ use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\entity\Entity;
 use pocketmine\item\Item;
 use pocketmine\level\Level;
+use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\StringTag;
@@ -42,13 +43,13 @@ class MobSpawnerTile extends Spawnable
      */
     public function __construct(Level $level, CompoundTag $nbt)
     {
-        if ($nbt->hasTag(self::ENTITY_ID, StringTag::class)) {
+        /*if ($nbt->hasTag(self::ENTITY_ID, StringTag::class)) {
             $nbt->removeTag(self::LOAD_RANGE);
             $nbt->removeTag(self::SPAWN_RANGE);
             $nbt->removeTag(self::DELAY);
             $nbt->removeTag(self::BASE_DELAY);
             $nbt->removeTag(self::COUNT);
-        }
+        }*/
         $range = (int)ConfigManager::getValue("spawn-range");
         if (!$nbt->hasTag(self::LOAD_RANGE, IntTag::class)) {
             $nbt->setInt(self::LOAD_RANGE, $range, true);
@@ -286,6 +287,7 @@ class MobSpawnerTile extends Spawnable
         $nbt->setInt(self::ENTITY_ID, $this->getNBT()->getInt(self::ENTITY_ID), true);
         $nbt->setInt(self::DELAY, $this->getNBT()->getInt(self::DELAY), true);
         $nbt->setInt(self::SPAWN_RANGE, $this->getNBT()->getInt(self::SPAWN_RANGE), true);
+        $nbt->setInt(self::COUNT, $this->getNBT()->getInt(self::COUNT), true);
     }
 
     /**
@@ -308,5 +310,4 @@ class MobSpawnerTile extends Spawnable
     {
         Forms::sendAddSpawnerForm($player, $this);
     }
-
 }
