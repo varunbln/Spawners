@@ -22,6 +22,10 @@ jobs:
       uses: wei/wget@v1
       with:
         args: -O vendor/UpdateNotifier.phar https://poggit.pmmp.io/r/62162/UpdateNotifier_dev-3.phar
+    - name: wget virions, ConfigUpdater
+      uses: wei/wget@v1
+      with:
+        args: -O vendor/ConfigUpdater.phar https://poggit.pmmp.io/r/52062/ConfigUpdater_dev-8.phar
     - name: Run PHPStan
       uses: nxtlvlsoftware/pmmp-phpstan-action@3
       with:
