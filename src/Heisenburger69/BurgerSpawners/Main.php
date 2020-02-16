@@ -20,6 +20,7 @@ use pocketmine\utils\TextFormat as C;
 use ReflectionException;
 use ReflectionProperty;
 use JackMD\UpdateNotifier\UpdateNotifier;
+use JackMD\ConfigNotifier\ConfigUpdater;
 
 class Main extends PluginBase
 {
