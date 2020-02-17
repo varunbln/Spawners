@@ -40,14 +40,11 @@ class ConfigManager
 
     /**
      * @param string $arrayTag
-     * @return array
+     * @return array|bool
      */
-    public static function getArray(string $arrayTag): array
+    public static function getArray(string $arrayTag)
     {
         $array = Main::getInstance()->getConfig()->get($arrayTag);
-        if(!is_array($array)) {
-            $array = [];
-        }
         return $array;
     }
 }
