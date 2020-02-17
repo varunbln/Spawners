@@ -39,6 +39,7 @@ class EntityManager extends Entity //Teaspoon <3
         self::registerEntity(PigZombie::class, true, ['PigZombie', 'minecraft:pigzombie']);
         self::registerEntity(PolarBear::class, true, ['PolarBear', 'minecraft:polarbear']);
         self::registerEntity(Rabbit::class, true, ['Rabbit', 'minecraft:rabbit']);
+        self::registerEntity(Ravager::class, true, ['Ravager', 'minecraft:ravager']);
         self::registerEntity(Sheep::class, true, ['Sheep', 'minecraft:sheep']);
         self::registerEntity(Shulker::class, true, ['Shulker', 'minecraft:shulker']);
         self::registerEntity(Silverfish::class, true, ['Silverfish', 'minecraft:silverfish']);

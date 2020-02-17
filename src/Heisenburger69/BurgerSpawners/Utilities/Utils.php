@@ -63,7 +63,8 @@ class Utils
             EntityIds::ZOMBIE_PIGMAN => "Zombie Pigman",
             EntityIds::ZOMBIE_VILLAGER => "Zombie Villager",
             121 => "Fox",
-            122 => "Bee"
+            122 => "Bee",
+            59 => "Ravager",
         ];
 
         return $names[$entityID] ?? "Monster";
@@ -102,6 +103,7 @@ class Utils
             "pig",
             "polarbear",
             "rabbit",
+            "ravager",
             "sheep",
             "shulker",
             "silverfish",
@@ -158,6 +160,7 @@ class Utils
             "pig" => EntityIds::PIG,
             "polarbear" => EntityIds::POLAR_BEAR,
             "rabbit" => EntityIds::RABBIT,
+            "ravager" => 59,
             "sheep" => EntityIds::SHEEP,
             "shulker" => EntityIds::SHULKER,
             "silverfish" => EntityIds::SILVERFISH,

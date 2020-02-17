@@ -10,16 +10,19 @@ use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
 use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
+use Heisenburger69\BurgerSpawners\Utilities\Utils;
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\block\BlockFactory;
 use pocketmine\entity\Entity;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\IntTag;
 use pocketmine\plugin\PluginBase;
 use pocketmine\tile\Tile;
 use pocketmine\utils\TextFormat as C;
 use ReflectionException;
 use ReflectionProperty;
-use JackMD\UpdateNotifier\UpdateNotifier;
 use JackMD\ConfigUpdater\ConfigUpdater;
 
 class Main extends PluginBase
@@ -48,11 +51,11 @@ class Main extends PluginBase
         ItemFactory::registerItem(new SpawnEgg(), true);
         Item::initCreativeItems();
 
-        if(ConfigManager::getToggle("register-mobs")) {
+        if (ConfigManager::getToggle("register-mobs")) {
             EntityManager::init();
         }
+      
         ConfigUpdater::checkUpdate($this, $this->getConfig(), "config-ver", self::CFGVERSION);
-
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
@@ -70,6 +73,21 @@ class Main extends PluginBase
     public static function getInstance(): Main
     {
         return self::$instance;
+    }
+
+    public function getSpawner(string $name, int $amount): Item
+    {
+        $entityID = Utils::getEntityIDFromName($name);
+
+        $nbt = new CompoundTag("", [
+            new IntTag("EntityID", (int)$entityID)
+        ]);
+
+        $spawner = Item::get(Item::MOB_SPAWNER, 0, $amount, $nbt);
+        $spawnerName = Utils::getEntityNameFromID((int)$entityID) . " Spawner";
+        $spawner->setCustomName(C::RESET . $spawnerName);
+
+        return $spawner;
     }
 
 }

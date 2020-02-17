@@ -48,6 +48,18 @@ spawn-range: 8
 # Some mobs, for example, Ghasts don't display higher values
 spawner-entity-scale: 1.8
 
+# If you don't want mobs to stack in a particular world, list the world's full Folder Name here. This is an array and any
+# worlds in this array will have mob stacking disabled.
+mob-stacking-disabled-worlds:
+  - "disabledmobstacking"
+  - "disabledmobstackingheretoo"
+
+# If you don't want spawners to stack in a particular world, list the world's full Folder Name here. This is an array and any
+# worlds in this array will have spawner stacking disabled.
+spawner-stacking-disabled-worlds:
+  - "disabledspawnerstacking"
+  - "disabledspawnerstackingheretoo"
+
 # Plugin Messages:
 # Use "&" for color codes.
 no-available-spawners: "&cYou do not have any Spawners of this type in your hand!"

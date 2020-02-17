@@ -108,7 +108,8 @@ class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
         EntityIds::PHANTOM => "minecraft:phantom",
         EntityIds::TRIPOD_CAMERA => "minecraft:tripod_camera",
         122 => "minecraft:bee",
-        121 => "minecraft:fox"
+        121 => "minecraft:fox",
+        59 => "minecraft:ravager",
     ];
 
     protected function encodePayload(): void
