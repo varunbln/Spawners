@@ -45,6 +45,9 @@ class ConfigManager
     public static function getArray(string $arrayTag): array
     {
         $array = Main::getInstance()->getConfig()->get($arrayTag);
+        if(!is_array($array)) {
+            $array = [];
+        }
         return $array;
     }
 }
