@@ -8,13 +8,13 @@ use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
-use pocketmine\event\block\BlockPlaceEvent;
 
 /**
  * Class EventListener
@@ -45,6 +45,7 @@ class EventListener implements Listener
         if (!$entity instanceof Living or $entity instanceof Human) {
             return;
         }
+
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
             if ($mobStacker->removeStack()) {
@@ -59,14 +60,22 @@ class EventListener implements Listener
      */
     public function onSpawn(EntitySpawnEvent $event): void
     {
+        $entity = $event->getEntity();
+        $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
+        if (is_array($disabledWorlds)) {
+            if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
+                return;
+            }
+        }
+
         if (ConfigManager::getToggle("allow-mob-stacking")) {
-            $entity = $event->getEntity();
             if ($entity instanceof Human or !$entity instanceof Living) return;
             $mobStacker = new Mobstacker($entity);
             $mobStacker->stack();
         }
     }
-        /**
+
+    /**
      * @param BlockPlaceEvent $event
      */
     public function onPlaceSpawner(BlockPlaceEvent $event): void
@@ -74,26 +83,30 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         $item = $event->getItem();
         $block = $event->getBlock();
-        $nbt = $item->getNamedTag();
-        $player = $event->getPlayer();
-        $vec3 = $event->getBlock()->asVector3();
-        $level = $player->getLevel();
-		$tiles = $block->getLevel()->getChunkTiles($block->getX() >> 4, $block->getZ() >> 4);
-		foreach($tiles as $tile){
-			if(!$tile instanceof MobSpawnerTile){
-				return;
-			}
-			if (ConfigManager::getToggle("allow-spawner-stacking")) {
-				if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
-					$tile->setCount($tile->getCount() + 1);
-					$player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
-					$event->setCancelled();
-				}
-			}
-		}
-   }
-   
-            
+        $tiles = $block->getLevel()->getChunkTiles($block->getX() >> 4, $block->getZ() >> 4);
+
+        $disabledWorlds = ConfigManager::getArray("spawner-stacking-disabled-worlds");
+        if (is_array($disabledWorlds)) {
+            if (in_array($player->getLevel()->getFolderName(), $disabledWorlds)) {
+                return;
+            }
+        }
+
+        foreach ($tiles as $tile) {
+            if (!$tile instanceof MobSpawnerTile) {
+                return;
+            }
+            if (ConfigManager::getToggle("allow-spawner-stacking")) {
+                if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
+                    $tile->setCount($tile->getCount() + 1);
+                    $player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
+                    $event->setCancelled();
+                }
+            }
+        }
+    }
+
+
     /**
      * @param PlayerInteractEvent $event
      */
@@ -105,8 +118,16 @@ class EventListener implements Listener
         }
         $nbt = $item->getNamedTag();
         $player = $event->getPlayer();
-        $vec3 = $event->getBlock()->asVector3();
         $level = $player->getLevel();
+
+        $disabledWorlds = ConfigManager::getArray("spawner-stacking-disabled-worlds");
+        if (is_array($disabledWorlds)) {
+            if (in_array($level->getFolderName(), $disabledWorlds)) {
+                return;
+            }
+        }
+
+        $vec3 = $event->getBlock()->asVector3();
         $tile = $level->getTile($vec3);
         if ($nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
             if (!$tile instanceof MobSpawnerTile) {

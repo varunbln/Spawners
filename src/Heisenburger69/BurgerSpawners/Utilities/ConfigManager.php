@@ -37,4 +37,14 @@ class ConfigManager
         $float = (float) Main::getInstance()->getConfig()->get($valueTag);
         return $float;
     }
+
+    /**
+     * @param string $arrayTag
+     * @return array
+     */
+    public static function getArray(string $arrayTag): array
+    {
+        $array = Main::getInstance()->getConfig()->get($arrayTag);
+        return $array;
+    }
 }

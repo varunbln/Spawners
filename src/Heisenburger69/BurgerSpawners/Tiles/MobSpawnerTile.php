@@ -43,14 +43,10 @@ class MobSpawnerTile extends Spawnable
      */
     public function __construct(Level $level, CompoundTag $nbt)
     {
-        /*if ($nbt->hasTag(self::ENTITY_ID, StringTag::class)) {
-            $nbt->removeTag(self::LOAD_RANGE);
-            $nbt->removeTag(self::SPAWN_RANGE);
-            $nbt->removeTag(self::DELAY);
-            $nbt->removeTag(self::BASE_DELAY);
-            $nbt->removeTag(self::COUNT);
-        }*/
         $range = (int)ConfigManager::getValue("spawn-range");
+        if($range === 0) { //Patch for outdated configs without "spawn-range" entry
+            $range = 8;
+        }
         if (!$nbt->hasTag(self::LOAD_RANGE, IntTag::class)) {
             $nbt->setInt(self::LOAD_RANGE, $range, true);
         }

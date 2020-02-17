@@ -87,17 +87,10 @@ class SpawnerCommand extends PluginCommand
             }
         }
 
-        $entityID = Utils::getEntityIDFromName($entityName);
-        $nbt = new CompoundTag("", [
-            new IntTag("EntityID", (int)$entityID)
-        ]);
-
-        $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
-        $spawnerName = Utils::getEntityNameFromID((int)$entityID) . " Spawner";
-        $spawner->setCustomName(C::RESET . $spawnerName);
+        $spawner = Main::$instance->getSpawner($entityName, $count);
+        $spawnerName = $spawner->getCustomName();
 
         if ($player instanceof Player) {
-
             $message = ConfigManager::getMessage("player-given-spawner");
             $message = str_replace("{player}", $player->getName(), $message);
             $message = str_replace("{spawner}", $spawnerName, $message);

@@ -10,7 +10,7 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - UI to add more Spawners onto an existing Spawner
 - Entities registered within the plugin itself including Iron Golems, Bees and Foxes
 - Configurable Options to modify XP drops, Spawner Rates, Mob and Spawner Stacking, Silk Touch and Entity Scale
-- Auto Stack spawners
+- Auto Stack Spawners
 - Basic implementation for looting drops.
 # Planned Additions
 - [x] Register Mobs via the plugin itself
@@ -26,10 +26,11 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - [x] Implement Looting Enchantment
 - [x] Autostack spawners when placed near another spawner of the same type
 - [x] Allow changing of the entity scale within the Spawner
-- [ ] Toggle spawning one every 20 seconds, or two every 40 seconds 
 # Note
 - Pandas drop Sugarcane instead of Bamboo
 - Bats, Ocelots, Bees, Vex, Witches, Silverfish and Endermite have no drops
 - Sheep drop a random color of wool
 - Thanks to Muqsit for Bees and Foxes <3
+- Thanks to iZeaoGamer for implementing looting
+- Thanks to Unickorn for patching bug related to spawner stacking
 
