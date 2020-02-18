@@ -96,16 +96,10 @@ class MobSpawnerTile extends Spawnable
                     $target = $this->getLevel()->getBlock($pos);
                     if ($target->getId() == Item::AIR) {
                         $success++;
-						$i = 1;
-						if($this->getCount() > $max = ceil(log(ConfigManager::getValue("base-spawn-rate"), 2))){ // Get the log2 of the base spawn rate to see how many it can stack.
-                        	$i = $this->getCount() - $max; // If it can't stack more, just spawn more entities!
-						}
-                        for(;$i >0; $i--){
-							$entity = Entity::createEntity($this->getEntityId(), $this->getLevel(), Entity::createBaseNBT($target->add(0.5, 0, 0.5), null, lcg_value() * 360, 0));
-							if ($entity instanceof Entity) {
-								$entity->spawnToAll();
-							}
-						}
+                        $entity = Entity::createEntity($this->getEntityId(), $this->getLevel(), Entity::createBaseNBT($target->add(0.5, 0, 0.5), null, lcg_value() * 360, 0));
+                        if ($entity instanceof Entity) {
+                            $entity->spawnToAll();
+                        }
                     }
                 }
                 if ($success > 0) {
@@ -166,7 +160,7 @@ class MobSpawnerTile extends Spawnable
     public function getBaseDelay(): int
     {
         $count = $this->getCount();
-        $baseDelay = ConfigManager::getValue("base-spawn-rate") * 20 / $count;
+        $baseDelay = 800 / $count;
         $this->setBaseDelay($baseDelay);
         return $baseDelay;
     }
