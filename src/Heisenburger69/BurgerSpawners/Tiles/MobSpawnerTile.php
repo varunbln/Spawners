@@ -306,8 +306,9 @@ class MobSpawnerTile extends Spawnable
     {
         Forms::sendAddSpawnerForm($player, $this);
     }
-    public function sendRemoveSpawnersForm(Player $player): void
-    {
-        Forms::sendRemoveSpawnerForm($player, $this);
-    }
+
+    
+    
+    
 }
+
