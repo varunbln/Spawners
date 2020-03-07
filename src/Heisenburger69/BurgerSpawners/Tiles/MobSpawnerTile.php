@@ -6,6 +6,7 @@ use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\entity\Entity;
+use pocketmine\entity\Human;
 use pocketmine\item\Item;
 use pocketmine\level\Level;
 use pocketmine\math\Vector3;
@@ -124,15 +125,8 @@ class MobSpawnerTile extends Spawnable
         if ($this->getEntityId() === 0) {
             return false;
         }
-        $hasPlayer = false;
-        foreach ($this->getLevel()->getEntities() as $e) {
-            if ($e instanceof Player) {
-                if ($e->distance($this->getBlock()) <= $this->getLoadRange()) {
-                    $hasPlayer = true;
-                }
-            }
-        }
-        if ($hasPlayer) {
+        
+        if ($this->getLevel()->getNearestEntity($this, 25, Human::class) instanceof Player) {
             return true;
         }
         return false;
