@@ -2,6 +2,7 @@
 
 namespace Heisenburger69\BurgerSpawners\Utilities;
 
+use Heisenburger69\BurgerSpawners\Main;
 use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\nbt\tag\IntTag;
@@ -82,7 +83,7 @@ class Mobstacker
         $boundingBox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
         foreach ($entity->getLevel()->getNearbyEntities($boundingBox) as $e) {
             if (!$e instanceof Player and $e instanceof Living) {
-                if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
+                if ($e->distance($entity) <= $range and $e->getName() === $entity->getName() && !in_array($entity->getId(), Main::$instance->exemptedEntities)) {
                     $ae = new Mobstacker($e);
                     if ($ae->isStacked() and !$this->isStacked()) return $e;
                 }

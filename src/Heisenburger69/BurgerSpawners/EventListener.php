@@ -44,9 +44,12 @@ class EventListener implements Listener
     public function onDamage(EntityDamageEvent $event): void
     {
         $entity = $event->getEntity();
-        if (!$entity instanceof Living or $entity instanceof Human) {
+
+        if (!$entity instanceof Living || $entity instanceof Human) {
             return;
         }
+
+        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
 
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
