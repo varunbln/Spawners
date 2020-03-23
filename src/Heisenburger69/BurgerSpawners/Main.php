@@ -35,6 +35,11 @@ class Main extends PluginBase
      */
     public static $instance;
 
+    /**
+     * @var array
+     */
+    public $exemptedEntities = [];
+
     public function onEnable(): void
     {
         self::$instance = $this;
@@ -84,6 +89,14 @@ class Main extends PluginBase
         $spawner->setCustomName(C::RESET . $spawnerName);
 
         return $spawner;
+    }
+
+    /**
+     * @param Entity $entity
+     */
+    public function exemptEntityFromStacking(Entity $entity): void
+    {
+        $this->exemptedEntities[] = $entity->getId();
     }
 
 }

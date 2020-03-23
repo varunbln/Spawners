@@ -10,6 +10,7 @@ use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -61,6 +62,9 @@ class EventListener implements Listener
     public function onSpawn(EntitySpawnEvent $event): void
     {
         $entity = $event->getEntity();
+
+        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
+
         $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
         if (is_array($disabledWorlds)) {
             if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
@@ -145,6 +149,18 @@ class EventListener implements Listener
         if (ConfigManager::getToggle("allow-spawner-stacking")) {
             Forms::sendSpawnerForm($tile, $player);
             $event->setCancelled(true);
+        }
+    }
+
+    /**
+     * @param EntityDeathEvent $event
+     */
+    public function onDeath(EntityDeathEvent $event): void
+    {
+        $entity = $event->getEntity();
+        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) {
+            $key = array_search($entity->getId(), $this->plugin->exemptedEntities);
+            unset($key);
         }
     }
 
