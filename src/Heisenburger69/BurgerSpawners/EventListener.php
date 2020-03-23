@@ -16,6 +16,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
+use pocketmine\scheduler\ClosureTask;
 
 /**
  * Class EventListener
@@ -62,21 +63,22 @@ class EventListener implements Listener
     public function onSpawn(EntitySpawnEvent $event): void
     {
         $entity = $event->getEntity();
+        $this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick) use ($entity): void {
+            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
 
-        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
-
-        $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
-        if (is_array($disabledWorlds)) {
-            if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
-                return;
+            $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
+            if (is_array($disabledWorlds)) {
+                if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
+                    return;
+                }
             }
-        }
 
-        if (ConfigManager::getToggle("allow-mob-stacking")) {
-            if ($entity instanceof Human or !$entity instanceof Living) return;
-            $mobStacker = new Mobstacker($entity);
-            $mobStacker->stack();
-        }
+            if (ConfigManager::getToggle("allow-mob-stacking")) {
+                if ($entity instanceof Human or !$entity instanceof Living) return;
+                $mobStacker = new Mobstacker($entity);
+                $mobStacker->stack();
+            }
+        }), 1);
     }
 
     /**
