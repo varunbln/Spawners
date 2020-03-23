@@ -159,7 +159,10 @@ class EventListener implements Listener
         }
     }
 
-    public function onExplode(EntityExplodeEvent $event)
+    /**
+     * @param EntityExplodeEvent $event
+     */
+    public function onExplode(EntityExplodeEvent $event): void
     {
         $blocks = $event->getBlockList();
         foreach ($blocks as $block) {
