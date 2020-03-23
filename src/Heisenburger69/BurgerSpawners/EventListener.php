@@ -2,6 +2,7 @@
 
 namespace Heisenburger69\BurgerSpawners;
 
+use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
@@ -11,6 +12,7 @@ use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDeathEvent;
+use pocketmine\event\entity\EntityExplodeEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -154,6 +156,16 @@ class EventListener implements Listener
         if (ConfigManager::getToggle("allow-spawner-stacking")) {
             Forms::sendSpawnerForm($tile, $player);
             $event->setCancelled(true);
+        }
+    }
+
+    public function onExplode(EntityExplodeEvent $event)
+    {
+        $blocks = $event->getBlockList();
+        foreach ($blocks as $block) {
+            if($block instanceof SpawnerBlock) {
+                $block->explode();
+            }
         }
     }
 

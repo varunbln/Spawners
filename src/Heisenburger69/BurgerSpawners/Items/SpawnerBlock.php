@@ -9,6 +9,7 @@ use pocketmine\block\Block;
 use pocketmine\block\MonsterSpawner as PMSpawner;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\Item;
+use pocketmine\level\Explosion;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;
@@ -130,4 +131,28 @@ class SpawnerBlock extends PMSpawner
 		}
         return $parent;
     }
+
+    /**
+     * @return bool
+     */
+    public function explode(): bool
+    {
+        if (ConfigManager::getToggle("enable-explosion-drop")) {
+            return false;
+        }
+        if(mt_rand(0, 100) > 50) return false;
+        $tile = $this->getLevel()->getTile($this->asVector3());
+        if ($tile instanceof MobSpawnerTile) {
+            $nbt = new CompoundTag("", [
+                new IntTag(MobSpawnerTile::ENTITY_ID, $tile->getEntityId())
+            ]);
+            $count = $tile->getCount();
+            $spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
+            $spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
+            $this->getLevel()->dropItem($this->add(0.5, 8, 0.5), $spawner);
+            return true;
+        }
+        return false;
+    }
+
 }
