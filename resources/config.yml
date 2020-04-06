@@ -30,6 +30,10 @@ mobs-drop-items: true
 # When set to true, only Pickaxes with Silk Touch can pick up Spawners
 enable-silk-touch: true
 
+# Setting this to true needs the player to have the permission "burgerspawners.silktouch" in order to
+# use the Silk Touch on Spawners.
+enable-silk-touch-permission: false
+
 # This is the base spawn rate of one Spawner. If this is set to 40, a single unstacked Zombie Spawner
 # spawns a Zombie every 40 seconds. If 2 Spawners are stacked, it spawns one every 20 seconds instead.
 # If you set this value to 20, a single unstacked Zombie Spawner will spawn one Zombie every 20 seconds.
@@ -65,7 +69,8 @@ spawner-stacking-disabled-worlds:
 no-available-spawners: "&cYou do not have any Spawners of this type in your hand!"
 player-given-spawner: "&aPlayer &b{player} &ahas been given an &b{spawner}"
 all-spawners-stacked: "&aAll available Spawners stacked"
-
+all-spawners-removed: "&aAll available Spawners removed"
+cannot-use-spawners-here: "&4You cannot use Spawners here!"
 
 
 

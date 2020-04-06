@@ -37,6 +37,12 @@ class Forms
                     }
                     break;
                 case 1:
+                    $spawner = Forms::$usingSpawner[$player->getName()];
+                    if ($spawner instanceof MobSpawnerTile) {
+                        $spawner->sendRemoveSpawnersForm($player);
+                    }
+                    break;
+                case 2:
                     break;
             }
         });
@@ -48,6 +54,7 @@ class Forms
         $form->setTitle(C::BOLD . C::DARK_BLUE . $spawnerName);
         $form->setContent(C::BOLD . C::AQUA . "Count: " . C::RESET . $count);
         $form->addButton(C::BOLD . C::GOLD . "Add Spawners");
+        $form->addButton(C::BOLD . C::GOLD . "Remove Spawners");
         $form->addButton(C::BOLD . C::RED . "Close");
         $player->sendForm($form);
     }
@@ -116,4 +123,46 @@ class Forms
         $form->addSlider(C::BOLD . C::GOLD . "Number of spawners to add" . C::YELLOW, 1, $max, 1);
 		$player->sendForm($form);
 	}
+
+    public static function sendRemoveSpawnersForm(Player $player, MobSpawnerTile $spawner): void
+    {
+        $form = new CustomForm(function (Player $player, array $response = null) {
+            if ($response === null) {
+                return;
+            }
+            if (isset($response[1])) {
+                $spawner = Forms::$usingSpawner[$player->getName()];
+                if ($spawner instanceof MobSpawnerTile) {
+
+                    $count = (int)$response[1];
+                    $max = $spawner->getCount();
+
+                    if ($count > $max) {
+                        $count = $max;
+                        $message = ConfigManager::getMessage("all-spawners-removed");
+                        if($message === "") {
+                            $message = C::colorize("&aAll available Spawners removed");
+                        }
+                        $player->sendMessage(Main::PREFIX . $message);
+                    }
+
+                    $entityName = Utils::getEntityNameFromID($spawner->getEntityId());
+                    $spawner = Main::$instance->getSpawner($entityName, $count);
+                    $player->getInventory()->addItem($spawner);
+
+                    $spawner->setCount($spawner->getCount() - $count);
+                }
+            }
+        });
+        Forms::$usingSpawner[$player->getName()] = $spawner;
+
+        $spawnerName = $spawner->getName();
+        $count = $spawner->getCount();
+
+        $form->setTitle(C::BOLD . C::DARK_BLUE . $spawnerName);
+        $form->addLabel(C::BOLD . C::AQUA . "Count: " . C::RESET . $count);
+        if($count > 64) $count = 64;
+        $form->addSlider(C::BOLD . C::GOLD . "Number of spawners to remove" . C::YELLOW, 1, $count, 1);
+        $player->sendForm($form);
+    }
 }

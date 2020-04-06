@@ -19,6 +19,7 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\scheduler\ClosureTask;
+use pocketmine\utils\TextFormat as C;
 
 /**
  * Class EventListener
@@ -120,6 +121,7 @@ class EventListener implements Listener
 
     /**
      * @param PlayerInteractEvent $event
+     * @priority MONITOR
      */
     public function onInteractSpawner(PlayerInteractEvent $event): void
     {
@@ -127,8 +129,18 @@ class EventListener implements Listener
         if ($item instanceof Pickaxe) {
             return;
         }
-        $nbt = $item->getNamedTag();
+
         $player = $event->getPlayer();
+        if($event->isCancelled()) {
+            $message = ConfigManager::getMessage("cannot-use-spawners-here");
+            if($message === "") {
+                $message = C::colorize("&4You cannot use Spawners here!");
+            }
+            $player->sendMessage($message);
+            return;
+        }
+
+        $nbt = $item->getNamedTag();
         $level = $player->getLevel();
 
         $disabledWorlds = ConfigManager::getArray("spawner-stacking-disabled-worlds");
