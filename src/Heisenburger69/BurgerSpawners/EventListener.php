@@ -73,8 +73,7 @@ class EventListener implements Listener
             if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return; 
             if($entity->getLevel()->isClosed()) return;
             $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
-            if (is_array($disabledWorlds)) {
-                
+            if (is_array($disabledWorlds)) { 
                 if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
                     return;
                 }
