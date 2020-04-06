@@ -57,7 +57,7 @@ class Main extends PluginBase
             EntityManager::init();
         }
 
-        //UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
+        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
     /**
