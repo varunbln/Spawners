@@ -70,15 +70,15 @@ class EventListener implements Listener
     {
         $entity = $event->getEntity();
         $this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick) use ($entity): void {
-            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
-
+            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return; 
+            if($entity->getLevel()->isClosed()) return;
             $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");
-            if (is_array($disabledWorlds)) {
+            if (is_array($disabledWorlds)) { 
                 if (in_array($entity->getLevel()->getFolderName(), $disabledWorlds)) {
                     return;
                 }
             }
-
+            
             if (ConfigManager::getToggle("allow-mob-stacking")) {
                 if ($entity instanceof Human or !$entity instanceof Living) return;
                 $mobStacker = new Mobstacker($entity);
