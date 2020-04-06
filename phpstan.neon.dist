@@ -5,12 +5,11 @@ parameters:
     inferPrivatePropertyTypeFromConstructor: true
 
     paths:
-        - /source/src
+        - src
     autoload_files:
         - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
     autoload_directories:
-        - /source/src
-        - phar:///source/vendor/libFormAPI.phar/src
-        - phar:///source/vendor/UpdateNotifier.phar/src
+        - src
+        - src/Heisenburger69/BurgerSpawners/libs
     excludes_analyse:
-        - source/vendor
+        - src/Heisenburger69/BurgerSpawners/libs
