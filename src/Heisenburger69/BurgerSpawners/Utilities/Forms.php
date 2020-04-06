@@ -6,6 +6,7 @@ use Heisenburger69\BurgerSpawners\Main;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\SimpleForm;
+use pocketmine\block\Block;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
@@ -147,10 +148,14 @@ class Forms
                     }
 
                     $entityName = Utils::getEntityNameFromID($spawner->getEntityId());
-                    $spawner = Main::$instance->getSpawner($entityName, $count);
-                    $player->getInventory()->addItem($spawner);
+                    $spawnerItem = Main::$instance->getSpawner($entityName, $count);
+                    $player->getInventory()->addItem($spawnerItem);
 
                     $spawner->setCount($spawner->getCount() - $count);
+                    if($spawner->getCount() <= 0) {
+                        $spawner->getLevel()->setBlock($spawner, Block::get(Block::AIR));
+                        $spawner->close();
+                    }
                 }
             }
         });
