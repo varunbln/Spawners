@@ -57,7 +57,7 @@ class Main extends PluginBase
             EntityManager::init();
         }
 
-        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
+        //UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
     /**
@@ -78,7 +78,7 @@ class Main extends PluginBase
 
     public function getSpawner(string $name, int $amount): Item
     {
-        $entityID = Utils::getEntityIDFromName($name);
+        $entityID = Utils::getEntityIDFromName(strtolower($name));
 
         $nbt = new CompoundTag("", [
             new IntTag("EntityID", (int)$entityID)
