@@ -52,6 +52,9 @@ spawn-range: 8
 # Some mobs, for example, Ghasts don't display higher values
 spawner-entity-scale: 1.8
 
+# Set this to true if all mobs should be killed by just one shot.
+one-shot-mobs: false
+
 # If you don't want mobs to stack in a particular world, list the world's full Folder Name here. This is an array and any
 # worlds in this array will have mob stacking disabled.
 mob-stacking-disabled-worlds:

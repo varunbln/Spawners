@@ -57,7 +57,7 @@ class EventListener implements Listener
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
             if ($mobStacker->removeStack()) {
-                $entity->setHealth($entity->getMaxHealth());
+                if(!ConfigManager::getToggle("one-shot-mobs")) $entity->setHealth($entity->getMaxHealth());
                 $event->setCancelled(true);
             }
         }
@@ -131,6 +131,14 @@ class EventListener implements Listener
         }
 
         $player = $event->getPlayer();
+        $vec3 = $event->getBlock()->asVector3();
+        $level = $player->getLevel();
+        $tile = $level->getTile($vec3);
+
+        if (!$tile instanceof MobSpawnerTile) {
+            return;
+        }
+
         if($event->isCancelled()) {
             $message = ConfigManager::getMessage("cannot-use-spawners-here");
             if($message === "") {
@@ -141,7 +149,6 @@ class EventListener implements Listener
         }
 
         $nbt = $item->getNamedTag();
-        $level = $player->getLevel();
 
         $disabledWorlds = ConfigManager::getArray("spawner-stacking-disabled-worlds");
         if (is_array($disabledWorlds)) {
@@ -150,8 +157,7 @@ class EventListener implements Listener
             }
         }
 
-        $vec3 = $event->getBlock()->asVector3();
-        $tile = $level->getTile($vec3);
+
         if ($nbt->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
             if (!$tile instanceof MobSpawnerTile) {
                 return;
@@ -162,9 +168,7 @@ class EventListener implements Listener
             }
             return;
         }
-        if (!$tile instanceof MobSpawnerTile) {
-            return;
-        }
+
         if (ConfigManager::getToggle("allow-spawner-stacking")) {
             Forms::sendSpawnerForm($tile, $player);
             $event->setCancelled(true);

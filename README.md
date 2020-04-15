@@ -11,7 +11,9 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - Entities registered within the plugin itself including Iron Golems, Bees and Foxes
 - Configurable Options to modify XP drops, Spawner Rates, Mob and Spawner Stacking, Silk Touch and Entity Scale
 - Auto Stack Spawners
+- Ability to toggle Mob and Spawner stacking in specific worlds
 - API Methods to exempt entities like Bosses from stacking
+- Mobs spawned by the plugin can be either one-shot or have vanilla behavior
 - Ability to unstack any number of Spawners from a Stack
 - Basic implementation for looting drops.
 # Planned Additions

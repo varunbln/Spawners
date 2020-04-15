@@ -78,7 +78,9 @@ class Main extends PluginBase
 
     public function getSpawner(string $name, int $amount): Item
     {
-        $entityID = Utils::getEntityIDFromName(strtolower($name));
+        $name = strtolower($name);
+        $name = str_replace(" ", "", $name);
+        $entityID = Utils::getEntityIDFromName($name);
 
         $nbt = new CompoundTag("", [
             new IntTag("EntityID", (int)$entityID)
