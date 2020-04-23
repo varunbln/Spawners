@@ -10,6 +10,7 @@ use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\entity\EntityExplodeEvent;
@@ -18,6 +19,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
+use pocketmine\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\utils\TextFormat as C;
 
@@ -56,7 +58,14 @@ class EventListener implements Listener
 
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
-            if ($mobStacker->removeStack()) {
+            $cause = null;
+            if($event instanceof EntityDamageByEntityEvent) {
+                $player = $event->getDamager();
+                if($player instanceof Player) {
+                    $cause = $player;
+                }
+            }
+            if ($mobStacker->removeStack($cause)) {
                 if(!ConfigManager::getToggle("one-shot-mobs")) $entity->setHealth($entity->getMaxHealth());
                 $event->setCancelled(true);
             }
@@ -70,7 +79,8 @@ class EventListener implements Listener
     {
         $entity = $event->getEntity();
         $this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick) use ($entity): void {
-            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return; 
+            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
+            if($entity instanceof Living && in_array($entity->getName(), $this->plugin->exemptedEntities)) return;
             if($entity->getLevel() === null) return;
             if($entity->getLevel()->isClosed()) return;
             $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");

@@ -93,9 +93,10 @@ class Mobstacker
     }
 
     /**
+     * @param Player|null $player
      * @return bool
      */
-    public function removeStack(): bool
+    public function removeStack(Player $player = null): bool
     {
         $entity = $this->entity;
         $nbt = $entity->namedtag;
@@ -109,13 +110,21 @@ class Mobstacker
 
         if(ConfigManager::getToggle("mobs-drop-items")) {
             foreach ($drops as $drop) {
-                $entity->getLevel()->dropItem($entity->getPosition(), $drop);
+                if($player instanceof Player && ConfigManager::getToggle("auto-inv")) {
+                    $player->getInventory()->addItem($drop);
+                } else {
+                    $entity->getLevel()->dropItem($entity->getPosition(), $drop);
+                }
             }
         }
         if(ConfigManager::getToggle("mobs-drop-exp")) {
             $exp = $entity->getXpDropAmount();
             if ($exp > 0) {
-                $entity->getLevel()->dropExperience($entity->asVector3(), $exp);
+                if($player instanceof Player && ConfigManager::getToggle("auto-xp")) {
+                    $player->addXp($exp);
+                } else {
+                    $entity->getLevel()->dropExperience($entity->asVector3(), $exp);
+                }
             }
         }
         return true;

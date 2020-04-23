@@ -26,6 +26,12 @@ mobs-drop-exp: true
 # Setting this to false makes mobs drop no items. This also ignores any Mob Drops set, both custom and default mob drops
 mobs-drop-items: true
 
+# Setting this to true makes drops from Spawners automatically go to the players inventory
+auto-inv: false
+
+# Setting this to true makes xp dropped automatically go to the player
+auto-xp: false
+
 # Enable Silk Touch. When set to false, Spawners can be picked up with all Pickaxes
 # When set to true, only Pickaxes with Silk Touch can pick up Spawners
 enable-silk-touch: true
