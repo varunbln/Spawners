@@ -119,7 +119,7 @@ class Utils
             "witherskeleton",
             "wolf",
             "zombie",
-            "zombiepigman",
+            "pigzombie",
             "zombievillager"];
         return $names;
     }
@@ -179,7 +179,7 @@ class Utils
             "wolf" => EntityIds::WOLF,
             "zombie" => EntityIds::ZOMBIE,
             "zombiehorse" => EntityIds::ZOMBIE_HORSE,
-            "zombiepigman" => EntityIds::ZOMBIE_PIGMAN,
+            "pigzombie" => EntityIds::ZOMBIE_PIGMAN,
             "zombievillager" => EntityIds::ZOMBIE_VILLAGER,
         ];
 
