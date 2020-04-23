@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="58298cb4-6c0e-4cdb-afd2-11bdcf47af52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heisenburger69/BurgerSpawners/EventListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heisenburger69/BurgerSpawners/EventListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.ymll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Heisenburger69/BurgerSpawners/Main.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heisenburger69/BurgerSpawners/Main.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +145,8 @@
       <workItem from="1587323725672" duration="194000" />
       <workItem from="1587325735558" duration="12000" />
       <workItem from="1587325777328" duration="3000" />
-      <workItem from="1587664641523" duration="443000" />
+      <workItem from="1587664641523" duration="2204000" />
+      <workItem from="1587668736172" duration="32000" />
     </task>
     <servers />
   </component>

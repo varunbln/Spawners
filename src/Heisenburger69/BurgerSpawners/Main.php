@@ -57,8 +57,10 @@ class Main extends PluginBase
             EntityManager::init();
         }
 
-        foreach (ConfigManager::getArray("exempted-entities") as $entityName) {
-            $this->exemptEntityFromStackingByName((string)$entityName);
+        if(is_array(ConfigManager::getArray("exempted-entities"))) {
+            foreach (ConfigManager::getArray("exempted-entities") as $entityName) {
+                $this->exemptEntityFromStackingByName((string)$entityName);
+            }
         }
 
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
