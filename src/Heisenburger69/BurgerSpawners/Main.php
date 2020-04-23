@@ -57,6 +57,12 @@ class Main extends PluginBase
             EntityManager::init();
         }
 
+        foreach (ConfigManager::getArray("exempted-entities") as $entityName) {
+            if(($entityId = Utils::getEntityIDFromName($entityName)) !== null) {
+                $this->exemptEntityFromStackingById((int)$entityId);
+            }
+        }
+
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
@@ -99,6 +105,14 @@ class Main extends PluginBase
     public function exemptEntityFromStacking(Entity $entity): void
     {
         $this->exemptedEntities[] = $entity->getId();
+    }
+
+    /**
+     * @param int $entityId
+     */
+    public function exemptEntityFromStackingById(int $entityId): void
+    {
+        $this->exemptedEntities[] = $entityId;
     }
 
 }

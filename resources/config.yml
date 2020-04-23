@@ -67,6 +67,12 @@ spawner-stacking-disabled-worlds:
   - "disabledspawnerstacking"
   - "disabledspawnerstackingheretoo"
 
+# Entities listed here are exempted from stacking. The name of the entity must be the same as
+# The name seen via /spawner list
+exempted-entities:
+  - "exampleentity"
+  - "exampleentity#2"
+
 # Plugin Messages:
 # Use "&" for color codes.
 no-available-spawners: "&cYou do not have any Spawners of this type in your hand!"
