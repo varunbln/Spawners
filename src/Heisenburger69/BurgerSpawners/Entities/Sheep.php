@@ -32,13 +32,11 @@ class Sheep extends Animal {
                 }else{
                     $lootingL = 1;
                 }
-                $drops = [Item::get(Item::WOOL, mt_rand(0, 15), 1 * $lootingL)]; //TODO: Check proper color
-                $drops[] = Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 * $lootingL));
-
-                return $drops;
+                }
             }
+        return [
+                Item::get(Item::WOOL, mt_rand(0, 15), 1 * $lootingL), //TODO: Check proper color
+                Item::get(Item::RAW_MUTTON, 0, mt_rand(1, 2 * $lootingL)),
+            ];
         }
-
-        return [];
     }
-}
