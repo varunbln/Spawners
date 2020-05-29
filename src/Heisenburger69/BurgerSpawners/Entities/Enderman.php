@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Enderman extends Monster {
 
@@ -39,5 +40,10 @@ class Enderman extends Monster {
         return [
             Item::get(Item::ENDER_PEARL, 0, mt_rand(0, 1 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

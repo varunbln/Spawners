@@ -9,6 +9,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Panda extends Animal
 {
@@ -42,5 +43,10 @@ class Panda extends Animal
         }
         $item = Item::get(Item::SUGARCANE, 0, mt_rand(1, 3 * $lootingL));
         return [$item];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
     }
 }

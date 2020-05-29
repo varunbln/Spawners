@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Monster;
+use function mt_rand;
 
 class Silverfish extends Monster {
 
@@ -13,5 +14,10 @@ class Silverfish extends Monster {
 
     public function getName(): string{
         return "Silverfish";
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Chicken extends Animal {
 
@@ -44,4 +45,10 @@ class Chicken extends Animal {
 
         return $drops;
     }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
+    }
+
 }

@@ -9,6 +9,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
+use function mt_rand;
 
 
 class CaveSpider extends Monster {
@@ -54,5 +55,10 @@ class CaveSpider extends Monster {
         }
 
         return $drops;
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

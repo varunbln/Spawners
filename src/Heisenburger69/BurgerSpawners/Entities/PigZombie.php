@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class PigZombie extends Monster {
 
@@ -42,5 +43,10 @@ class PigZombie extends Monster {
             $drops[] = Item::get(Item::GOLD_INGOT, 0, 1 * $lootingL);
         }
         return $drops;
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

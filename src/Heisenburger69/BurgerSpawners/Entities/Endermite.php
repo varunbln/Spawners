@@ -14,4 +14,9 @@ class Endermite extends Monster {
     public function getName(): string{
         return "Endermite";
     }
+
+    public function getXpDropAmount(): int
+    {
+        return 3;
+    }
 }

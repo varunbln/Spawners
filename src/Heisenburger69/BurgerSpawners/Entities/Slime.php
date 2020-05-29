@@ -52,4 +52,9 @@ class Slime extends Living {
 
         return $drops;
     }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 4);
+    }
 }

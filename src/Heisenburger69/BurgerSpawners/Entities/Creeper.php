@@ -8,6 +8,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Creeper extends Monster
 {
@@ -44,6 +45,11 @@ class Creeper extends Monster
         }
 
         return [];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 
 }

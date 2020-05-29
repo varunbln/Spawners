@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Animal;
+use function mt_rand;
 
 class Ocelot extends Animal {
 
@@ -13,6 +14,11 @@ class Ocelot extends Animal {
 
     public function getName(): string{
         return "Ocelot";
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
     }
 
 }

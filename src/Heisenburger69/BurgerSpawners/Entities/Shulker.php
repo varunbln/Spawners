@@ -9,6 +9,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Shulker extends Monster {
 
@@ -47,5 +48,10 @@ class Shulker extends Monster {
 
     public function knockBack(Entity $attacker, float $damage, float $x, float $z, float $base = 0.4): void{
         return;
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

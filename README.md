@@ -9,6 +9,7 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - Ability to use Silk Touch on Spawners
 - UI to add more Spawners onto an existing Spawner
 - Entities registered within the plugin itself including Iron Golems, Bees and Foxes
+- AutoInv and AutoXP for mob drops
 - Configurable Options to modify XP drops, Spawner Rates, Mob and Spawner Stacking, Silk Touch and Entity Scale
 - Auto Stack Spawners
 - Ability to toggle Mob and Spawner stacking in specific worlds

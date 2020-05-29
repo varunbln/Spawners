@@ -38,4 +38,9 @@ class Evoker extends Monster {
             Item::get(Item::EMERALD, 0, mt_rand(0, 1 * $lootingL))
         ];
     }
+
+    public function getXpDropAmount(): int
+    {
+        return 10;
+    }
 }

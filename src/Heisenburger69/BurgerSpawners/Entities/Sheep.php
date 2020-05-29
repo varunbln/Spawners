@@ -7,6 +7,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\Item;
 use pocketmine\Player;
+use function mt_rand;
 
 class Sheep extends Animal {
 
@@ -40,5 +41,10 @@ class Sheep extends Animal {
         }
 
         return [];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
     }
 }

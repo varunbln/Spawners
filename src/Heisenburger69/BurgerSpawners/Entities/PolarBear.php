@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class PolarBear extends Monster {
 
@@ -43,5 +44,10 @@ class PolarBear extends Monster {
             Item::get(Item::RAW_SALMON, 0, mt_rand(0, 2 * $lootingL)),
             Item::get(Item::RAW_FISH, 0, mt_rand(0, 2 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
     }
 }

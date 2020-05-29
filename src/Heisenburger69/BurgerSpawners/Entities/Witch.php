@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Monster;
+use function mt_rand;
 
 class Witch extends Monster {
 
@@ -22,5 +23,10 @@ class Witch extends Monster {
 
     public function getDrops(): array{
         return [];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

@@ -34,7 +34,7 @@ class Guardian extends Monster
         if($cause instanceof EntityDamageByEntityEvent){
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
-             
+
                 $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
                 if($looting !== null){
                     $lootingL = $looting->getLevel();
@@ -47,5 +47,10 @@ class Guardian extends Monster
             Item::get(Item::RAW_FISH, 0, mt_rand(1, 2 * $lootingL)),
             Item::get(Item::PRISMARINE_SHARD, 0, mt_rand(0, 1 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 10;
     }
 }

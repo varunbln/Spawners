@@ -54,4 +54,9 @@ class Spider extends Monster {
 
         return $drops;
     }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
+    }
 }

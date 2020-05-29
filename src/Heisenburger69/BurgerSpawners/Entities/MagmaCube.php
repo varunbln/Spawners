@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class MagmaCube extends Monster {
 
@@ -33,6 +34,11 @@ class MagmaCube extends Monster {
             }
         }
         return [Item::get(Item::MAGMA_CREAM, 0, mt_rand(0, 1 * $lootingL))];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 4);
     }
 
 }

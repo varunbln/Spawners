@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Vindicator extends Monster {
 
@@ -43,5 +44,10 @@ class Vindicator extends Monster {
         return [
             Item::get(Item::EMERALD, 0, mt_rand(0, 1 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

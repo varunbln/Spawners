@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Zombie;
+use function mt_rand;
 
 class Husk extends Zombie {
 
@@ -10,5 +11,10 @@ class Husk extends Zombie {
 
     public function getName(): string{
         return "Husk";
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

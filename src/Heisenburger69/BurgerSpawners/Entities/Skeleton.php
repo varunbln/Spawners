@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Skeleton extends Monster {
 
@@ -38,5 +39,10 @@ class Skeleton extends Monster {
             Item::get(Item::ARROW, 0, mt_rand(0, 2 * $lootingL)),
             Item::get(Item::BONE, 0, mt_rand(0, 2 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }

@@ -41,4 +41,9 @@ class ElderGuardian extends Monster {
             Item::get(Item::PRISMARINE_SHARD, 0, mt_rand(0, 2 * $lootingL)),
         ];
     }
+
+    public function getXpDropAmount(): int
+    {
+        return 10;
+    }
 }

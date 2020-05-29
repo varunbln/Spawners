@@ -7,6 +7,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Blaze extends Monster
 {
@@ -37,6 +38,11 @@ class Blaze extends Monster
             }
         }
         return [Item::get(Item::BLAZE_ROD, 0, mt_rand(0, 1 * $lootingL))];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 10;
     }
 
 }

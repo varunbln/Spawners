@@ -9,6 +9,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use function mt_rand;
 
 class Cow extends Animal {
 
@@ -40,5 +41,10 @@ class Cow extends Animal {
             Item::get(Item::RAW_BEEF, 0, mt_rand(1, 3 * $lootingL)),
             Item::get(Item::LEATHER, 0, mt_rand(0, 2 * $lootingL)),
         ];
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return mt_rand(1, 3);
     }
 }

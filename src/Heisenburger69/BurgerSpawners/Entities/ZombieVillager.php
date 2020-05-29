@@ -3,6 +3,7 @@
 namespace Heisenburger69\BurgerSpawners\Entities;
 
 use pocketmine\entity\Zombie;
+use function mt_rand;
 
 class ZombieVillager extends Zombie
 {
@@ -21,5 +22,10 @@ class ZombieVillager extends Zombie
     {
         $this->setMaxHealth(20);
         parent::initEntity();
+    }
+
+    public function getXpDropAmount(): int
+    {
+        return 5 + mt_rand(1, 3);
     }
 }
