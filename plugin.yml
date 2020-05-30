@@ -11,5 +11,8 @@ permissions:
   burgerspawners.silktouch:
     default: op
     description: Allows a user to use SilkTouch on Spawners
+  burgerspawners.nosilktouch:
+    default: false
+    description: Allows a user to pickup Spawners even without Silk Touch
 
 ...

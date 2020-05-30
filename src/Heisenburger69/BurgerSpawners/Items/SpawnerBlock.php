@@ -116,7 +116,7 @@ class SpawnerBlock extends PMSpawner
     public function onBreak(Item $item, Player $player = null): bool
     {
         $parent = parent::onBreak($item, $player);
-        if (ConfigManager::getToggle("enable-silk-touch") &&  !$item->hasEnchantment(Enchantment::SILK_TOUCH)) {
+        if (ConfigManager::getToggle("enable-silk-touch") && !$item->hasEnchantment(Enchantment::SILK_TOUCH) && !$player->hasPermission("burgerspawners.nosilktouch")) {
             return $parent;
         }
         if (ConfigManager::getToggle("enable-silk-touch-permission") && !$player->hasPermission("burgerspawners.silktouch")) {
