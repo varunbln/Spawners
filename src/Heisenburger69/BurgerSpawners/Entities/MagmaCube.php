@@ -13,6 +13,9 @@ class MagmaCube extends Monster {
 
     public const NETWORK_ID = self::MAGMA_CUBE;
 
+    public $width = 2.04;
+    public $height = 2.04;
+
     public function getName(): string{
         return "Magma Cube";
     }
