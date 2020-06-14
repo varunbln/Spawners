@@ -8,6 +8,7 @@ use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
+use pocketmine\block\Block;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -139,6 +140,9 @@ class EventListener implements Listener
     {
         $item = $event->getItem();
         if ($item instanceof Pickaxe) {
+            return;
+        }
+        if($item instanceof Block) {
             return;
         }
 
