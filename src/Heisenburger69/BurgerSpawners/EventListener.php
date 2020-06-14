@@ -7,6 +7,7 @@ use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
+use Heisenburger69\BurgerSpawners\Utilities\Utils;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -80,7 +81,7 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         $this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick) use ($entity): void {
             if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
-            if($entity instanceof Living && in_array($entity->getName(), $this->plugin->exemptedEntities)) return;
+            if($entity instanceof Living && in_array(Utils::getEntityNameFromID($entity->getId()), $this->plugin->exemptedEntities)) return;
             if($entity->getLevel() === null) return;
             if($entity->getLevel()->isClosed()) return;
             $disabledWorlds = ConfigManager::getArray("mob-stacking-disabled-worlds");

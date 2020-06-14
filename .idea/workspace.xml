@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58298cb4-6c0e-4cdb-afd2-11bdcf47af52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.yml" afterDir="false" />
-    </list>
+    <list default="true" id="58298cb4-6c0e-4cdb-afd2-11bdcf47af52" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +148,7 @@
       <workItem from="1589371498864" duration="25000" />
       <workItem from="1589372019490" duration="12000" />
       <workItem from="1590760305464" duration="1127000" />
-      <workItem from="1590842829023" duration="121000" />
+      <workItem from="1590842829023" duration="390000" />
     </task>
     <servers />
   </component>
