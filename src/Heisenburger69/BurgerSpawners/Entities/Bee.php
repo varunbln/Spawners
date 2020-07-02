@@ -24,7 +24,7 @@ class Bee extends Living
     {
         $pk = new AddActorPacket();
         $pk->entityRuntimeId = $this->getId();
-        $pk->type = static::NETWORK_ID;
+        $pk->type = "minecraft:bee";
         $pk->position = $this->asVector3();
         $pk->motion = $this->getMotion();
         $pk->yaw = $this->yaw;
