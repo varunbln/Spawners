@@ -2,13 +2,13 @@
 
 namespace Heisenburger69\BurgerSpawners;
 
+use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
 use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Forms;
 use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
-use pocketmine\block\Block;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -19,6 +19,7 @@ use pocketmine\event\entity\EntityExplodeEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\item\ItemBlock;
 use pocketmine\item\Pickaxe;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
@@ -142,7 +143,7 @@ class EventListener implements Listener
         if ($item instanceof Pickaxe) {
             return;
         }
-        if($item instanceof Block) {
+        if($item instanceof ItemBlock) {
             return;
         }
 
@@ -152,6 +153,9 @@ class EventListener implements Listener
         $tile = $level->getTile($vec3);
 
         if (!$tile instanceof MobSpawnerTile) {
+            if($item instanceof SpawnEgg){
+                $item->pop();
+            }
             return;
         }
 
