@@ -78,6 +78,12 @@ spawner-stacking-disabled-worlds:
 exempted-entities:
   - "exampleentity"
   - "exampleentity#2"
+  
+# Setts custom mob drops
+# FORMAT: <id:meta:count>
+custom-mob-drops:
+  zombie:
+    - "409:0:1"
 
 # Plugin Messages:
 # Use "&" for color codes.
