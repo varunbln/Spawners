@@ -79,7 +79,7 @@ exempted-entities:
   - "exampleentity"
   - "exampleentity#2"
   
-# Setts custom mob drops
+# Set custom drops for mobs here
 # FORMAT: <id:meta:count>
 custom-mob-drops:
   zombie:
