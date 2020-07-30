@@ -104,7 +104,7 @@ class Mobstacker
             return false;
         }
         $nbt->setInt(self::STACK, --$c);
-        $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
+        $event = new EntityDeathEvent($entity, $drops = $this->getDrops($entity));
         $event->call();
         $this->updateNameTag();
 
@@ -137,4 +137,32 @@ class Mobstacker
     {
         return $this->entity->namedtag->getInt(self::STACK);
     }
+    
+    /**
+     * @param Living $entity
+     * @return bool
+     */
+    public function hasCustomDrops(Living $entity): bool
+    {
+        return isset(ConfigManager::getArray("custom-mob-drops")[strtolower($entity->getName())]);
+    }
+
+    /**
+     * @param Living $entity
+     * @return array
+     */
+    public function getDrops(Living $entity): array
+    {
+        if ($this->hasCustomDrops($entity)) {
+            $dropData = ConfigManager::getArray("custom-mob-drops")[strtolower($entity->getName())];
+            $drops = [];
+            foreach ($dropData as $dropString) {
+                $drops[] = Item::fromString($dropString);
+            }
+            return $drops;
+        } else {
+            return $entity->getDrops();
+        }
+    }
+    
 }
