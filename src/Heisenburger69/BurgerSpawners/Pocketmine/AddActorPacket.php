@@ -4,6 +4,7 @@ namespace Heisenburger69\BurgerSpawners\Pocketmine;
 
 use pocketmine\entity\EntityIds;
 use pocketmine\network\mcpe\protocol\AddActorPacket as VanillaAddActorPacket;
+use function count;
 
 class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
 {
@@ -116,10 +117,7 @@ class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
     {
         $this->putEntityUniqueId($this->entityUniqueId ?? $this->entityRuntimeId);
         $this->putEntityRuntimeId($this->entityRuntimeId);
-        if (!isset(self::LEGACY_ID_MAP_BC[$this->type])) {
-            throw new \InvalidArgumentException("Unknown entity numeric ID $this->type");
-        }
-        $this->putString(self::LEGACY_ID_MAP_BC[$this->type]);
+        $this->putString($this->type);
         $this->putVector3($this->position);
         $this->putVector3Nullable($this->motion);
         ($this->buffer .= (\pack("g", $this->pitch)));
@@ -127,7 +125,7 @@ class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
         ($this->buffer .= (\pack("g", $this->headYaw)));
 
         $this->putUnsignedVarInt(count($this->attributes));
-        foreach ($this->attributes as $attribute) {
+        foreach($this->attributes as $attribute){
             $this->putString($attribute->getName());
             ($this->buffer .= (\pack("g", $attribute->getMinValue())));
             ($this->buffer .= (\pack("g", $attribute->getValue())));
@@ -136,7 +134,7 @@ class AddActorPacket extends VanillaAddActorPacket //Thank you Muqsit <3
 
         $this->putEntityMetadata($this->metadata);
         $this->putUnsignedVarInt(count($this->links));
-        foreach ($this->links as $link) {
+        foreach($this->links as $link){
             $this->putEntityLink($link);
         }
     }
