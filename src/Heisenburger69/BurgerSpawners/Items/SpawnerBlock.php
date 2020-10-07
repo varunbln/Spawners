@@ -2,6 +2,9 @@
 
 namespace Heisenburger69\BurgerSpawners\Items;
 
+use Heisenburger69\BurgerSpawners\Events\SpawnerBreakEvent;
+use Heisenburger69\BurgerSpawners\Events\SpawnerPlaceEvent;
+use Heisenburger69\BurgerSpawners\Events\SpawnerStackEvent;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
 use Heisenburger69\BurgerSpawners\Utilities\Utils;
@@ -44,6 +47,7 @@ class SpawnerBlock extends PMSpawner
             /** @var MobSpawnerTile $tile */
             $tile = Tile::createTile(Tile::MOB_SPAWNER, $this->getLevel(), $nbt);
             $tile->setEntityId($item->getDamage());
+            (new SpawnerPlaceEvent($tile))->call();
         }
 
         return true;
@@ -83,6 +87,7 @@ class SpawnerBlock extends PMSpawner
                     $tile->setEntityId($entityId);
                     $scale = ConfigManager::getValue("spawner-entity-scale");
                     $tile->setEntityScale($scale);
+                    (new SpawnerPlaceEvent($tile))->call();
                 }
             }
         }
@@ -131,7 +136,9 @@ class SpawnerBlock extends PMSpawner
 			$spawner = Item::get(Item::MOB_SPAWNER, 0, $count, $nbt);
 			$spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
 			$this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
-		}
+
+            (new SpawnerBreakEvent($tile))->call();
+        }
         return $parent;
     }
 

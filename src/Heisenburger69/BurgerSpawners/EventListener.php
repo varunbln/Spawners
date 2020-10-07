@@ -2,6 +2,7 @@
 
 namespace Heisenburger69\BurgerSpawners;
 
+use Heisenburger69\BurgerSpawners\Events\SpawnerStackEvent;
 use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
 use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
@@ -124,6 +125,7 @@ class EventListener implements Listener
             }
             if (ConfigManager::getToggle("allow-spawner-stacking")) {
                 if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $tile->getEntityId()) {
+                    (new SpawnerStackEvent($tile, 1))->call();
                     $tile->setCount($tile->getCount() + 1);
                     $player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
                     $event->setCancelled();

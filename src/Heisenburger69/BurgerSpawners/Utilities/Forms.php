@@ -2,6 +2,8 @@
 
 namespace Heisenburger69\BurgerSpawners\Utilities;
 
+use Heisenburger69\BurgerSpawners\Events\SpawnerStackEvent;
+use Heisenburger69\BurgerSpawners\Events\SpawnerUnstackEvent;
 use Heisenburger69\BurgerSpawners\Main;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
 use jojoe77777\FormAPI\CustomForm;
@@ -100,7 +102,7 @@ class Forms
                             $player->getInventory()->setItemInHand(Item::get(Item::AIR));
                         }
                     }
-
+                    (new SpawnerStackEvent($spawner, $count))->call();
                     $spawner->setCount($spawner->getCount() + $count);
                 }
             }
@@ -152,7 +154,9 @@ class Forms
                     $spawnerItem = Main::$instance->getSpawner($entityName, $count);
                     $player->getInventory()->addItem($spawnerItem);
 
+                    (new SpawnerUnstackEvent($spawner, $count))->call();
                     $spawner->setCount($spawner->getCount() - $count);
+
                     if($spawner->getCount() <= 0) {
                         $spawner->getLevel()->setBlock($spawner, Block::get(Block::AIR));
                         $spawner->close();

@@ -34,7 +34,7 @@ class ConfigManager
      */
     public static function getValue(string $valueTag): float
     {
-        $float = (float) Main::getInstance()->getConfig()->get($valueTag);
+        $float = (float)Main::getInstance()->getConfig()->get($valueTag);
         return $float;
     }
 
