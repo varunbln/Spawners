@@ -87,7 +87,7 @@ class SpawnerBlock extends PMSpawner
                     $tile->setEntityId($entityId);
                     $scale = ConfigManager::getValue("spawner-entity-scale");
                     $tile->setEntityScale($scale);
-                    (new SpawnerPlaceEvent($tile))->call();
+                    (new SpawnerPlaceEvent($player, $tile))->call();
                 }
             }
         }
@@ -137,7 +137,7 @@ class SpawnerBlock extends PMSpawner
 			$spawner->setCustomName(C::RESET . Utils::getEntityNameFromID((int)$tile->getEntityId()) . " Spawner");
 			$this->getLevel()->dropItem($this->add(0.5, 0.5, 0.5), $spawner);
 
-            (new SpawnerBreakEvent($tile))->call();
+            (new SpawnerBreakEvent($player, $tile))->call();
         }
         return $parent;
     }
