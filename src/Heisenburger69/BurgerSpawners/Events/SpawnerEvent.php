@@ -2,11 +2,12 @@
 
 namespace Heisenburger69\BurgerSpawners\Events;
 
+use Heisenburger69\BurgerSpawners\Main;
 use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
-use pocketmine\event\Event;
+use pocketmine\event\plugin\PluginEvent;
 use pocketmine\Player;
 
-class SpawnerEvent extends Event
+class SpawnerEvent extends PluginEvent
 {
     /**
      * @var MobSpawnerTile
@@ -19,6 +20,7 @@ class SpawnerEvent extends Event
 
     public function __construct(Player $player, MobSpawnerTile $spawnerTile)
     {
+        parent::__construct(Main::getInstance());
         $this->player = $player;
         $this->spawnerTile = $spawnerTile;
     }
