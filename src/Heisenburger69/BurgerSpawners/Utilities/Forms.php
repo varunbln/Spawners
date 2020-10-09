@@ -76,6 +76,7 @@ class Forms
                     $count = (int)$response[1];
 
                     $item = $player->getInventory()->getItemInHand();
+
                     if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $entityId) {
                         $stackCount = $item->getCount();
                         $max = $stackCount;
@@ -93,17 +94,18 @@ class Forms
 
                     $item = $player->getInventory()->getItemInHand();
                     if ($item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class) && $item->getNamedTagEntry("EntityID")->getValue() === $entityId) {
+                        ($event = new SpawnerStackEvent($player, $spawner, $count))->call();
+                        if($event->isCancelled()) return;
                         $stackCount = $item->getCount();
                         $leftover = $stackCount - $count;
-                        if($leftover > 0) {
+                        if ($leftover > 0) {
                             $item->setCount($leftover);
                             $player->getInventory()->setItemInHand($item);
                         } else {
                             $player->getInventory()->setItemInHand(Item::get(Item::AIR));
                         }
+                        $spawner->setCount($spawner->getCount() + $count);
                     }
-                    (new SpawnerStackEvent($spawner, $count))->call();
-                    $spawner->setCount($spawner->getCount() + $count);
                 }
             }
         });
@@ -141,26 +143,28 @@ class Forms
                     $count = (int)$response[1];
                     $max = $spawner->getCount();
 
+                    $message = "";
                     if ($count > $max) {
                         $count = $max;
                         $message = ConfigManager::getMessage("all-spawners-removed");
                         if($message === "") {
                             $message = C::colorize("&aAll available Spawners removed");
                         }
-                        $player->sendMessage(Main::PREFIX . $message);
                     }
+                    ($event = new SpawnerUnstackEvent($player, $spawner, $count))->call();
+                    if($event->isCancelled()) return;
 
                     $entityName = Utils::getEntityNameFromID($entityId);
                     $spawnerItem = Main::$instance->getSpawner($entityName, $count);
                     $player->getInventory()->addItem($spawnerItem);
 
-                    (new SpawnerUnstackEvent($spawner, $count))->call();
                     $spawner->setCount($spawner->getCount() - $count);
 
                     if($spawner->getCount() <= 0) {
                         $spawner->getLevel()->setBlock($spawner, Block::get(Block::AIR));
                         $spawner->close();
                     }
+                    $player->sendMessage(Main::PREFIX . $message);
                 }
             }
         });
