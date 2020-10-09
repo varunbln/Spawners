@@ -14,4 +14,12 @@ class SpawnerStackEvent extends SpawnerEvent
         $this->count = $count;
         parent::__construct($spawnerTile);
     }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
 }

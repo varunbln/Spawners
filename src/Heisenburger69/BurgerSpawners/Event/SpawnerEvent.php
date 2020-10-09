@@ -16,4 +16,12 @@ class SpawnerEvent extends Event
     {
         $this->spawnerTile = $spawnerTile;
     }
+
+    /**
+     * @return MobSpawnerTile
+     */
+    public function getSpawnerTile(): MobSpawnerTile
+    {
+        return $this->spawnerTile;
+    }
 }
