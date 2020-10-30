@@ -47,7 +47,7 @@ class SpawnerBlock extends PMSpawner
             /** @var MobSpawnerTile $tile */
             $tile = Tile::createTile(Tile::MOB_SPAWNER, $this->getLevel(), $nbt);
             $tile->setEntityId($item->getDamage());
-            (new SpawnerPlaceEvent($tile))->call();
+            (new SpawnerPlaceEvent($player, $tile))->call();
         }
 
         return true;
