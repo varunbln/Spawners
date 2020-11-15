@@ -1,3 +1,5 @@
+[![](https://poggit.pmmp.io/shield.dl.total/BurgerSpawners)](https://poggit.pmmp.io/p/BurgerSpawners)
+
 # Information
 This plugin adds a Stackable Spawner System to PMMP. When you place a Spawner, you can stack additional Spawners onto the same Spawner to increase it's spawn rate. This lets you conserve space and also prevents lag due to a large amount of Spawners.  
 For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stacking another Zombie Spawner on it changes the spawn rate to 20 seconds.  
