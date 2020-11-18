@@ -19,6 +19,7 @@ use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\entity\EntityExplodeEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
+use pocketmine\item\Item;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\ItemBlock;
 use pocketmine\item\Pickaxe;
@@ -146,7 +147,7 @@ class EventListener implements Listener
         if ($item instanceof Pickaxe) {
             return;
         }
-        if($item instanceof ItemBlock) {
+        if($item instanceof ItemBlock && $item->getId() !== Item::MOB_SPAWNER) {
             return;
         }
 
