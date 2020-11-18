@@ -147,7 +147,7 @@ class EventListener implements Listener
         if ($item instanceof Pickaxe) {
             return;
         }
-        if($item instanceof ItemBlock && $item->getId() !== Item::MOB_SPAWNER) {
+        if($item instanceof ItemBlock && !$item->getNamedTag()->hasTag(MobSpawnerTile::ENTITY_ID, IntTag::class)) {
             return;
         }
 
