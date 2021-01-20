@@ -114,6 +114,7 @@ class Utils
             "squid",
             "stray",
             "vex",
+            "villager", 
             "vindicator",
             "witch",
             "witherskeleton",
