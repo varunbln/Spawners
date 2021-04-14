@@ -8,6 +8,7 @@ use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
+use pocketmine\item\Item;
 
 /*
 Modified version of MobStacker by UnknownOre
