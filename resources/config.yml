@@ -40,6 +40,10 @@ enable-silk-touch: true
 # use the Silk Touch on Spawners.
 enable-silk-touch-permission: false
 
+## Setting this to true allows spawners to drop when they are exploded
+## (by an entity or tnt).
+enable-explosion-drop: true
+
 # This is the base spawn rate of one Spawner. If this is set to 40, a single unstacked Zombie Spawner
 # spawns a Zombie every 40 seconds. If 2 Spawners are stacked, it spawns one every 20 seconds instead.
 # If you set this value to 20, a single unstacked Zombie Spawner will spawn one Zombie every 20 seconds.
