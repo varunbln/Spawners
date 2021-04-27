@@ -147,7 +147,7 @@ class SpawnerBlock extends PMSpawner
      */
     public function explode(): bool
     {
-        if (ConfigManager::getToggle("enable-explosion-drop")) {
+        if (!ConfigManager::getToggle("enable-explosion-drop")) {
             return false;
         }
         if(mt_rand(0, 100) > 50) return false;
