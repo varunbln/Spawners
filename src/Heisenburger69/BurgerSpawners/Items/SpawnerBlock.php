@@ -150,7 +150,9 @@ class SpawnerBlock extends PMSpawner
         if (!ConfigManager::getToggle("enable-explosion-drop")) {
             return false;
         }
-        if(mt_rand(0, 100) > 50) return false;
+      if (mt_rand(0, 100) > (int)ConfigManager::getValue("explosion-drop-chance")){
+	      return false;
+      }
         $tile = $this->getLevel()->getTile($this->asVector3());
         if ($tile instanceof MobSpawnerTile) {
             $nbt = new CompoundTag("", [

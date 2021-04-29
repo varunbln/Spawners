@@ -44,6 +44,14 @@ enable-silk-touch-permission: false
 ## (by an entity or tnt).
 enable-explosion-drop: true
 
+## This setting allows you to make explosion drops have a chance.
+## This option will only work if "enable-explosion-drop" is set to true.
+## Default: 50
+## Please also keep in mind - You can't go over 100 in chances, only from 0 to 100.
+## 100 means spawner drops from explosions will always occur.
+## 0 means spawner drops will (either rarely or not at all) happen.
+explosion-drop-chance: 50
+
 # This is the base spawn rate of one Spawner. If this is set to 40, a single unstacked Zombie Spawner
 # spawns a Zombie every 40 seconds. If 2 Spawners are stacked, it spawns one every 20 seconds instead.
 # If you set this value to 20, a single unstacked Zombie Spawner will spawn one Zombie every 20 seconds.
