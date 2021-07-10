@@ -8,7 +8,7 @@
 #                 |___/                |_|
 
 
-# Set this to false if you want to register Entities with an external plugin like PureEntitiesX.
+# Set this to false if you want to register entities with an external plugin like PureEntitiesX.
 # If this is set to false the only spawners that will work are Zombie and Squid, if you don't have an external plugin
 register-mobs: true
 
@@ -35,6 +35,9 @@ auto-xp: false
 # Enable Silk Touch. When set to false, Spawners can be picked up with all Pickaxes
 # When set to true, only Pickaxes with Silk Touch can pick up Spawners
 enable-silk-touch: true
+
+# Setting this to false disables nametags on mobs
+enable-nametags: true
 
 # Setting this to true needs the player to have the permission "burgerspawners.silktouch" in order to
 # use the Silk Touch on Spawners.
@@ -64,6 +67,9 @@ base-spawn-rate: 40
 # Highest to go: 16, but you can do more. Whatever suits your needs.
 # Default: 8
 spawn-range: 8
+
+# This is the max number of mobs that can be in one stack at once
+max-stack: 500
   
 # This is the Entity Scale within the Spawner. The size of the entity inside the spawner can be configured
 # using this. A too high or a too low value won't show. The optimal range is between 1-2.
@@ -85,11 +91,11 @@ spawner-stacking-disabled-worlds:
   - "disabledspawnerstacking"
   - "disabledspawnerstackingheretoo"
 
-# Entities listed here are exempted from stacking. The name of the entity must be the same as
+# entities listed here are exempted from stacking. The name of the entity must be the same as
 # The name seen via /spawner list
 exempted-entities:
+  - "chicken"
   - "exampleentity"
-  - "exampleentity#2"
   
 # Set custom drops for mobs here
 # FORMAT: <id:meta:count>
@@ -104,6 +110,7 @@ player-given-spawner: "&aPlayer &b{player} &ahas been given an &b{spawner}"
 all-spawners-stacked: "&aAll available Spawners stacked"
 all-spawners-removed: "&aAll available Spawners removed"
 cannot-use-spawners-here: "&4You cannot use Spawners here!"
+mob-nametag: "&l&b{count}x &a{name}"
 
 
 

@@ -2,14 +2,14 @@
 
 namespace Heisenburger69\BurgerSpawners;
 
-use Heisenburger69\BurgerSpawners\Events\SpawnerStackEvent;
-use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
-use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
-use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
-use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
-use Heisenburger69\BurgerSpawners\Utilities\Forms;
-use Heisenburger69\BurgerSpawners\Utilities\Mobstacker;
-use Heisenburger69\BurgerSpawners\Utilities\Utils;
+use Heisenburger69\BurgerSpawners\events\SpawnerStackEvent;
+use Heisenburger69\BurgerSpawners\items\SpawnEgg;
+use Heisenburger69\BurgerSpawners\items\SpawnerBlock;
+use Heisenburger69\BurgerSpawners\tiles\MobSpawnerTile;
+use Heisenburger69\BurgerSpawners\utils\ConfigManager;
+use Heisenburger69\BurgerSpawners\utils\Forms;
+use Heisenburger69\BurgerSpawners\utils\Mobstacker;
+use Heisenburger69\BurgerSpawners\utils\Utils;
 use pocketmine\entity\Human;
 use pocketmine\entity\Living;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -19,7 +19,6 @@ use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\entity\EntityExplodeEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
-use pocketmine\item\Item;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\ItemBlock;
 use pocketmine\item\Pickaxe;
@@ -27,6 +26,7 @@ use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\utils\TextFormat as C;
+use function str_replace;
 
 /**
  * Class EventListener
@@ -37,7 +37,7 @@ class EventListener implements Listener
     /**
      * @var Main
      */
-    private $plugin;
+    private Main $plugin;
 
     /**
      * EventListener constructor.
@@ -59,7 +59,7 @@ class EventListener implements Listener
             return;
         }
 
-        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
+        if (in_array(strtolower($entity->getSaveId()), $this->plugin->exemptedEntities)) return;
 
         $mobStacker = new Mobstacker($entity);
         if ($entity->getHealth() - $event->getFinalDamage() <= 0) {
@@ -85,8 +85,8 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         $this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick) use ($entity): void {
               if(!$entity instanceof Living) return;
-            if(!in_array(strtolower($entity->getName()), Utils::getEntityArrayList())) return;
-            if (in_array($entity->getId(), $this->plugin->exemptedEntities)) return;
+            if(!in_array(str_replace(" ", "", strtolower($entity->getName())), Utils::getEntityArrayList())) return;
+            if (in_array(strtolower($entity->getSaveId()), $this->plugin->exemptedEntities)) return;
             if(in_array(Utils::getEntityNameFromID($entity->getId()), $this->plugin->exemptedEntities)) return;
             if($entity->getLevel() === null) return;
             if($entity->getLevel()->isClosed()) return;
@@ -220,8 +220,8 @@ class EventListener implements Listener
     public function onDeath(EntityDeathEvent $event): void
     {
         $entity = $event->getEntity();
-        if (in_array($entity->getId(), $this->plugin->exemptedEntities)) {
-            $key = array_search($entity->getId(), $this->plugin->exemptedEntities);
+        if (in_array(strtolower($entity->getSaveId()), $this->plugin->exemptedEntities)) {
+            $key = array_search($entity->getSaveId(), $this->plugin->exemptedEntities);
             unset($key);
         }
     }

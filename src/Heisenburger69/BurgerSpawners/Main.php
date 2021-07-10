@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Heisenburger69\BurgerSpawners;
 
-use Heisenburger69\BurgerSpawners\Commands\SpawnerCommand;
-use Heisenburger69\BurgerSpawners\Entities\EntityManager;
-use Heisenburger69\BurgerSpawners\Items\SpawnEgg;
-use Heisenburger69\BurgerSpawners\Items\SpawnerBlock;
-use Heisenburger69\BurgerSpawners\Tiles\MobSpawnerTile;
-use Heisenburger69\BurgerSpawners\Utilities\ConfigManager;
-use Heisenburger69\BurgerSpawners\Utilities\Utils;
-use JackMD\UpdateNotifier\UpdateNotifier;
+use Heisenburger69\BurgerSpawners\commands\SpawnerCommand;
+use Heisenburger69\BurgerSpawners\entities\EntityManager;
+use Heisenburger69\BurgerSpawners\items\SpawnEgg;
+use Heisenburger69\BurgerSpawners\items\SpawnerBlock;
+use Heisenburger69\BurgerSpawners\tiles\MobSpawnerTile;
+use Heisenburger69\BurgerSpawners\utils\ConfigManager;
+use Heisenburger69\BurgerSpawners\utils\Utils;
 use pocketmine\block\BlockFactory;
 use pocketmine\entity\Entity;
 use pocketmine\item\Item;
@@ -23,6 +22,7 @@ use pocketmine\tile\Tile;
 use pocketmine\utils\TextFormat as C;
 use ReflectionException;
 use ReflectionProperty;
+use function strtolower;
 
 class Main extends PluginBase
 {
@@ -33,12 +33,12 @@ class Main extends PluginBase
     /**
      * @var Main
      */
-    public static $instance;
+    public static Main $instance;
 
     /**
      * @var array
      */
-    public $exemptedEntities = [];
+    public array $exemptedEntities = [];
 
     public function onEnable(): void
     {
@@ -59,11 +59,9 @@ class Main extends PluginBase
 
         if(is_array(ConfigManager::getArray("exempted-entities"))) {
             foreach (ConfigManager::getArray("exempted-entities") as $entityName) {
-                $this->exemptEntityFromStackingByName((string)$entityName);
+                $this->exemptEntityFromStackingByName($entityName);
             }
         }
-
-        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
     /**
@@ -97,14 +95,6 @@ class Main extends PluginBase
         $spawner->setCustomName(C::RESET . $spawnerName);
 
         return $spawner;
-    }
-
-    /**
-     * @param Entity $entity
-     */
-    public function exemptEntityFromStacking(Entity $entity): void
-    {
-        $this->exemptedEntities[] = $entity->getId();
     }
 
     /**
