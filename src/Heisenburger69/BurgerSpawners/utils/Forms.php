@@ -154,17 +154,17 @@ class Forms
                     }
                     ($event = new SpawnerUnstackEvent($player, $spawner, $count))->call();
                     if($event->isCancelled()) return;
+                    if($spawner->isClosed()) return;
+                    $spawner->setCount($spawner->getCount() - $count);
+                    if($spawner->getCount() <= 0) {
+                        $spawner->getLevel()->setBlock($spawner, Block::get(Block::AIR));
+                        $spawner->close();
+                    }
 
                     $entityName = Utils::getEntityNameFromID($entityId);
                     $spawnerItem = Main::$instance->getSpawner($entityName, $count);
                     $player->getInventory()->addItem($spawnerItem);
 
-                    $spawner->setCount($spawner->getCount() - $count);
-
-                    if($spawner->getCount() <= 0) {
-                        $spawner->getLevel()->setBlock($spawner, Block::get(Block::AIR));
-                        $spawner->close();
-                    }
                     $player->sendMessage(Main::PREFIX . $message);
                 }
             }
