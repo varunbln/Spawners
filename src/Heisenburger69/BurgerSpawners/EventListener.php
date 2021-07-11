@@ -220,8 +220,9 @@ class EventListener implements Listener
     public function onDeath(EntityDeathEvent $event): void
     {
         $entity = $event->getEntity();
-        if (in_array(strtolower($entity->getSaveId()), $this->plugin->exemptedEntities)) {
-            $key = array_search($entity->getSaveId(), $this->plugin->exemptedEntities);
+        if($entity instanceof Player)return;
+        if (in_array(strtolower($entity->getId()), $this->plugin->exemptedEntities)) {
+            $key = array_search($entity->getId(), $this->plugin->exemptedEntities);
             unset($key);
         }
     }
