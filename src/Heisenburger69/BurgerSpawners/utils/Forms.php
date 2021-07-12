@@ -75,6 +75,7 @@ class Forms
 
                     $entityId = $spawner->getEntityId();
                     $count = (int)$response[1];
+                    if($count < 0) return;
 
                     $item = $player->getInventory()->getItemInHand();
 
