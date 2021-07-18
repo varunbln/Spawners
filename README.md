@@ -37,6 +37,7 @@ For example: A single Zombie Spawner spawns one Zombie every 40 seconds. Stackin
 - [x] Autostack spawners when placed near another spawner of the same type
 - [x] Allow changing of the entity scale within the Spawner
 # Note
+- This plugin uses https://github.com/jojoe77777/FormAPI to render forms
 - Pandas drop Sugarcane instead of Bamboo
 - Bats, Ocelots, Bees, Vex, Witches, Silverfish and Endermite have no drops
 - Sheep drop a random color of wool
