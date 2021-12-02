@@ -3,7 +3,7 @@ name: BurgerSpawners
 main: Heisenburger69\BurgerSpawners\Main
 version: 0.1.7
 api: 3.21.0
-mcpe-protocol: [471]
+mcpe-protocol: [475]
 author: Heisenburger69
 website: https://github.com/Heisenburger69
 description: Plugin implementing a Stackable Spawner System for PMMP
